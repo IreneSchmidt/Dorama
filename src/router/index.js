@@ -24,7 +24,6 @@ const routes = [
     name: 'doramas',
     component: DoramasView,
     meta: { requiresAuth: true }
->>>>>>> feature/homepage
   }
 ]
 
