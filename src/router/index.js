@@ -1,12 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
+// 1. Use caminho relativo como solução imediata
+import HomeView from '../views/HomeView.vue' // 👈 Corrigido
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
-import DoramasView from '../views/DoramasView.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/doramas'
+    name: 'home',
+    component: HomeView
   },
   {
     path: '/login',
@@ -17,12 +20,6 @@ const routes = [
     path: '/register',
     name: 'register',
     component: RegisterView
-  },
-  {
-    path: '/doramas',
-    name: 'doramas',
-    component: DoramasView,
-    meta: { requiresAuth: true }
   }
 ]
 
