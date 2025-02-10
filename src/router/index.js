@@ -1,15 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DoramaList from '../components/DoramaList.vue'
+
+import LoginView from '../views/LoginView.vue'
+import RegisterView from '../views/RegisterView.vue'
+import DoramasView from '../views/DoramasView.vue'
 
 const routes = [
-  { 
-    path: '/:catchAll(.*)*', // Adicione esta rota de fallback
-    redirect: '/' 
-  },
-  { 
+  {
     path: '/',
-    name: 'Home',
-    component: DoramaList
+    redirect: '/doramas'
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterView
+  },
+  {
+    path: '/doramas',
+    name: 'doramas',
+    component: DoramasView,
+    meta: { requiresAuth: true }
+>>>>>>> feature/homepage
   }
 ]
 
