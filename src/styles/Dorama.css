@@ -1,0 +1,27 @@
+
+.genero-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.genero-select,
+.genero-input {
+  padding: 8px;
+  border: 2px solid #1e3a5f;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.genero-button {
+  background-color: #1e3a5f;
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.genero-button:hover {
+  background-color: #14273d;
+}
