@@ -1,0 +1,10 @@
+.modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .estrelas span {
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
