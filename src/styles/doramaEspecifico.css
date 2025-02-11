@@ -1,0 +1,63 @@
+.dorama-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .imagem-dorama img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  .avaliacoes {
+    margin-top: 2rem;
+  }
+  
+  .avaliacao {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .estrelas-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Espaço entre as estrelas e a nota */
+  }
+  
+  .estrelas {
+    color: #ffd700; /* Cor das estrelas */
+    font-size: 1.2rem;
+  }
+  
+  .estrelas .filled {
+    color: #ffd700; /* Cor das estrelas preenchidas */
+  }
+  
+  .nota {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  button {
+    background-color: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
