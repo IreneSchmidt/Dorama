@@ -1,6 +1,6 @@
 <template>
   <div class="avaliar-dorama">
-    <h2>Avaliar {{ dorama.title }}</h2>
+    <h2>Avaliar {{ dorama.nome }}</h2>
 
     <form @submit.prevent="salvarAvaliacao">
       <div class="input-group">
@@ -28,7 +28,12 @@
     </div>
 
     <!-- Modal para exibir após o envio -->
-    <ModalAvaliacao v-if="mostrarModal" @close="fecharModal" />
+    <ModalAvaliacao 
+      v-if="mostrarModal" 
+      :dorama="dorama" 
+      @fechar="fecharModal" 
+      @salvar-avaliacao="handleSalvarAvaliacao"
+    />
   </div>
 </template>
 
@@ -79,6 +84,12 @@ const salvarAvaliacao = async () => {
 // Função para fechar o modal
 const fecharModal = () => {
   mostrarModal.value = false;
+};
+
+// Função para lidar com a avaliação salva
+const handleSalvarAvaliacao = (avaliacao) => {
+  // Aqui você pode adicionar a avaliação à lista de avaliações do dorama
+  console.log('Avaliação salva:', avaliacao);
 };
 </script>
 

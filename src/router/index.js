@@ -5,6 +5,7 @@ import HomeView from '../views/HomeView.vue' // 👈 Corrigido
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AvaliarDorama from '../views/generic/AvaliarDorama.vue';
+import doramaEspecifico from '../views/generic/doramaEspecifico.vue';
 
 
 
@@ -30,6 +31,11 @@ const routes = [
     name: AvaliarDorama,
     component: AvaliarDorama 
   },
+  {
+    path: '/dorama/:id',
+    name: 'DoramaEspecifico',
+    component: doramaEspecifico
+  }
 
 ]
 

@@ -19,17 +19,18 @@
           @mouseover="hoverCard = dorama.id"
           @mouseleave="hoverCard = null"
         >
-          <div class="card-image" :style="{ backgroundImage: `url(${dorama.image})` }">
-            <div class="rating-badge">
-              ⭐ {{ dorama.rating }}
+          <router-link :to="`/dorama/${dorama.id}`"> <!-- Adiciona o link aqui -->
+            <div class="card-image" :style="{ backgroundImage: `url(${dorama.image})` }">
+              <div class="rating-badge">
+                ⭐ {{ dorama.rating }}
+              </div>
             </div>
-          </div>
-          
-          <div class="card-content">
-            <h3 class="dorama-title">{{ dorama.title }}</h3>
-            <p class="dorama-genre">{{ dorama.genre }}</p>
-            <p class="dorama-description">{{ dorama.description }}</p>
-          </div>
+            <div class="card-content">
+              <h3 class="dorama-title">{{ dorama.title }}</h3>
+              <p class="dorama-genre">{{ dorama.genre }}</p>
+              <p class="dorama-description">{{ dorama.description }}</p>
+            </div>
+          </router-link>
         </div>
       </div>
     </main>
@@ -40,29 +41,36 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 
-const hoverCard = ref(null)
-
-const doramas = ref([
-  {
-    id: 1,
-    title: 'Goblin: The Lonely and Great God',
-    genre: 'Fantasia Romântica',
-    rating: 4.8,
-    description: 'Um imortal busca sua noiva humana para quebrar sua maldição milenar.',
-    image: 'https://via.placeholder.com/400x250?text=Capa+Goblin'
-  },
-  {
-    id: 2,
-    title: 'Crash Landing on You',
-    genre: 'Romance Dramático',
-    rating: 4.9,
-    description: 'Uma herdeira coreana encontra amor ao cair acidentalmente na Coreia do Norte.',
-    image: 'https://via.placeholder.com/400x250?text=Capa+CLOY'
+export default defineComponent({
+  name: 'HomePage',
+  data() {
+    return {
+      hoverCard: null as string | null, // Definindo explicitamente o tipo como string | null
+      doramas: [
+        // Lista de doramas (exemplo)
+        {
+          id: '1',
+          image: 'Pousando_no_Amor.jpg',
+          rating: 10,
+          title: 'Pousando No Amor',
+          genre: 'Ação',
+          description: 'Um acidente de parapente leva uma herdeira sul-coreana à Coreia do Norte. Ali, ela acaba conhecendo um oficial do exército, que vai ajudá-la a se esconder.'
+        },
+        {
+          id: '2',
+          image: 'Rainha_das_Lagrimas.jpg',
+          rating: 9.5,
+          title: 'Rainha das Lágrimas',
+          genre: 'Romance',
+          description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.'
+        }
+      ]
+    };
   }
-])
+});
 </script>
 
 <style scoped>
@@ -175,21 +183,7 @@ const doramas = ref([
 
 .dorama-genre {
   color: #3498db;
-  font-size: 0.9rem;
-  margin-bottom: 0.8rem;
+  font-size: 0.9r
 }
 
-.dorama-description {
-  color: #7f8c8d;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.site-footer {
-  background: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 1.5rem;
-  margin-top: 4rem;
-}
 </style>

@@ -1,45 +1,43 @@
+import axios from 'axios';
+import Avaliacao from '../model/generic/Avaliacao'; // Importando o modelo correto para a Avaliação
 
-import  Avaliacao  from "../model/generic/Avaliacao";  // Importando o modelo correto para a Avaliação
+const API_URL = 'https://api.exemplo.com'; // Substitua com a URL da sua API
 
 // Função para enviar avaliação para a API
 export const enviarAvaliacaoParaApi = async (avaliacao: Avaliacao) => {
   try {
-    const response = await fetch('/api/avaliacoes', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(avaliacao)
+    const response = await axios.post(`${API_URL}/avaliacoes`, avaliacao, {
+      headers: { 'Content-Type': 'application/json' }
     });
 
-    // Verificar se a resposta da API foi bem-sucedida
-    if (!response.ok) {
-      throw new Error(`Erro ${response.status}: ${response.statusText}`);
-    }
-    
-    // Retornar a resposta em formato JSON
-    return await response.json();
+    // Retornar a resposta da API
+    return response.data;
   } catch (error) {
-    // Exibir o erro no console e relançá-lo
     console.error('Erro ao enviar avaliação:', error);
-    throw error;  // Relança o erro para ser tratado no ponto onde for chamado
+    throw error; // Relança o erro para ser tratado no ponto onde for chamado
   }
 };
 
 // Função para buscar um dorama específico pela ID
 export const buscarDoramaPorId = async (id: string) => {
   try {
-    const response = await fetch(`/api/doramas/${id}`);
-
-    // Verificar se a resposta da API foi bem-sucedida
-    if (!response.ok) {
-      throw new Error(`Erro ao buscar dorama: ${response.statusText}`);
-    }
+    const response = await axios.get(`${API_URL}/doramas/${id}`);
 
     // Retornar o dorama encontrado
-    const dorama = await response.json();
-    return dorama;
+    return response.data;
   } catch (error) {
-    // Exibir o erro no console e relançá-lo
     console.error('Erro ao buscar dorama:', error);
-    throw error;  // Relança o erro para ser tratado no ponto onde for chamado
+    throw error; // Relança o erro para ser tratado no ponto onde for chamado
+  }
+};
+
+// Função para buscar avaliações de um dorama específico pela ID
+export const getAvaliacoes = async (doramaId: string) => {
+  try {
+    const response = await axios.get(`${API_URL}/doramas/${doramaId}/avaliacoes`);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar avaliações:', error);
+    throw error;
   }
 };
