@@ -4,3 +4,5 @@ dist
 node_modules/
 .vite/
 *.log
+package-lock.json
+dist/
