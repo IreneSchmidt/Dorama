@@ -1,5 +1,3 @@
-import type { IEntity } from "../model/generic/IEntity"; 
-
 export interface IGenero  {
     Id: string;
     Nome: string;
