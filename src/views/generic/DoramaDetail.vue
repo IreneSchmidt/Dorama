@@ -14,40 +14,37 @@
 
           <div class="ratings-section">
             <h2>Avaliações</h2>
-            <div v-if="dorama.ratings && dorama.ratings.length > 0">
-              <div v-for="rating in dorama.ratings" :key="rating.id" class="rating-item">
-                <p>{{ rating.user }}: {{ rating.comment }} (⭐ {{ rating.score }})</p>
-              </div>
+            <div v-for="rating in dorama.ratings" :key="rating.id" class="rating-item">
+              <p>{{ rating.user }}: {{ rating.comment }} (⭐ {{ rating.score }})</p>
             </div>
-            <p v-else>Nenhuma avaliação ainda.</p>
-
-            <button @click="showRatingModal = true" class="rate-button">Avaliar</button>
           </div>
+          <div v-if="!dorama">
+  <p>Dorama não encontrado.</p>
+</div>
+
+
+          <button @click="showRatingModal = true" class="rate-button">Avaliar</button>
         </div>
       </div>
       <div v-else>
         <p>Dorama não encontrado.</p>
+      </div>
+
+      <!-- Mensagem de Sucesso -->
+      <div v-if="avaliacaoSalva" class="success-message">
+        Avaliação salva com sucesso!
       </div>
     </main>
 
     <Footer />
 
     <!-- Modal de Avaliação -->
-    <div v-if="showRatingModal" class="modal">
-      <div class="modal-content">
-        <h2>Avaliar Dorama</h2>
-        <form @submit.prevent="submitRating">
-          <label for="score">Nota:</label>
-          <input type="number" id="score" v-model="newRating.score" min="1" max="10" required>
-
-          <label for="comment">Comentário:</label>
-          <textarea id="comment" v-model="newRating.comment" required></textarea>
-
-          <button type="submit">Enviar Avaliação</button>
-          <button type="button" @click="showRatingModal = false">Cancelar</button>
-        </form>
-      </div>
-    </div>
+    <ModalAvaliacao 
+      v-if="showRatingModal" 
+      :dorama="dorama" 
+      @fechar="fecharModal" 
+      @salvar-avaliacao="handleSalvarAvaliacao"
+    />
   </div>
 </template>
 
@@ -56,79 +53,103 @@ import { defineComponent, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
+import ModalAvaliacao from '@/components/ModalAvaliacao.vue'; // Importando o ModalAvaliacao
+
+// Definindo a interface Avaliacao
+interface Avaliacao {
+  id: string;       // ID da avaliação
+  user: string;     // Nome do usuário
+  score: number;    // Nota de 1 a 10
+  comment: string;  // Comentário da avaliação
+  data: string;     // Data da avaliação
+}
 
 export default defineComponent({
   name: 'DoramaDetail',
   components: {
     Navbar,
-    Footer
+    Footer,
+    ModalAvaliacao // Registrando o componente ModalAvaliacao
   },
   setup() {
     const route = useRoute();
     const doramaId = route.params.id;
 
-    // Simulação de dados dos doramas
+    // Dados dos doramas simulados
     const doramas = ref([
       {
         id: '1',
         image: 'Pousando_no_Amor.jpg',
         title: 'Pousando No Amor',
         genre: 'Ação',
-        description: 'Um acidente de parapente leva uma herdeira sul-coreana à Coreia do Norte. Ali, ela acaba conhecendo um oficial do exército, que vai ajudá-la a se esconder.',
+        description: '...',
         episodes: 16,
         releaseDate: '2020-12-14',
-        ratings: []
+        ratings: [] as Avaliacao[] // Usando Avaliacao
       },
       {
         id: '2',
         image: 'Rainha_das_Lagrimas.jpg',
         title: 'Rainha das Lágrimas',
         genre: 'Romance',
-        description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.',
+        description: '...',
         episodes: 20,
         releaseDate: '2021-03-01',
-        ratings: []
+        ratings: [] as Avaliacao[] // Usando Avaliacao
       },
       {
         id: '3',
         image: 'Round_6.jpeg',
         title: 'Round 6',
         genre: 'Suspense',
-        description: 'Centenas de jogadores falidos aceitam um estranho convite para um jogo de sobrevivência. Um prêmio milionário aguarda, mas as apostas são altas e mortais.',
+        description: '...',
         episodes: 10,
         releaseDate: '2021-09-17',
-        ratings: []
+        ratings: [] as Avaliacao[] // Usando Avaliacao
       }
     ]);
 
-    // Encontrar o dorama com base no ID
+    // Computando o dorama com base no ID da rota
     const dorama = computed(() => {
-      return doramas.value.find(d => d.id === doramaId);
+      const found = doramas.value.find(d => d.id === doramaId);
+      if (!found) {
+        alert('Dorama não encontrado!');
+      }
+      return found;
     });
 
     const showRatingModal = ref(false);
-    const newRating = ref({
-      score: 1,
-      comment: '',
-      user: 'Usuário Anônimo'
-    });
+    const avaliacaoSalva = ref(false); // Controle da mensagem de sucesso
 
-    const submitRating = () => {
+    // Função para fechar o modal
+    const fecharModal = () => {
+      showRatingModal.value = false;
+    };
+
+    // Função para lidar com a avaliação salva
+    const handleSalvarAvaliacao = (avaliacao: Avaliacao) => {
       if (dorama.value) {
-        dorama.value.ratings.push({
-          id: dorama.value.ratings.length + 1,
-          ...newRating.value
-        });
-        showRatingModal.value = false;
-        newRating.value = { score: 1, comment: '', user: 'Usuário Anônimo' };
+        const novaAvaliacao: Avaliacao = {
+          ...avaliacao,
+          id: (dorama.value.ratings.length + 1).toString(),
+          data: new Date().toISOString(),
+        };
+
+        dorama.value.ratings.push(novaAvaliacao);
+        avaliacaoSalva.value = true;
+
+        setTimeout(() => {
+          avaliacaoSalva.value = false;
+        }, 2000);
       }
     };
 
     return {
       dorama,
       showRatingModal,
-      newRating,
-      submitRating
+      fecharModal,
+      handleSalvarAvaliacao,
+      avaliacaoSalva
     };
   }
 });
@@ -210,64 +231,12 @@ export default defineComponent({
   background-color: #0d3a6b;
 }
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  width: 400px;
-}
-
-.modal-content form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.modal-content label {
-  font-weight: 600;
-}
-
-.modal-content input, .modal-content textarea {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.modal-content button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.modal-content button[type="submit"] {
-  background-color: #104881;
+.success-message {
+  background-color: #28a745;
   color: white;
-}
-
-.modal-content button[type="submit"]:hover {
-  background-color: #0d3a6b;
-}
-
-.modal-content button[type="button"] {
-  background-color: #ccc;
-  color: #041622;
-}
-
-.modal-content button[type="button"]:hover {
-  background-color: #bbb;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  text-align: center;
 }
 </style>
