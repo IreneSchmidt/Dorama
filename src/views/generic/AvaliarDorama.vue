@@ -40,7 +40,6 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
-
 import ModalAvaliacao from '../../components/ModalAvaliacao.vue';  
 
 const doramaId = useRoute().params.id; // Obtendo o ID do dorama da URL
