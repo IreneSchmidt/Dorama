@@ -16,7 +16,7 @@
           <div class="ratings-section">
             <h2>Avaliações</h2>
             <div v-for="rating in dorama.ratings" :key="rating.id" class="rating-item">
-              <p>{{ rating.nome }}: {{ rating.comentario }} (⭐ {{ rating.estrelas }})</p>
+              <p>{{ rating.user }}: {{ rating.comment }} (⭐ {{ rating.score }})</p>
             </div>
           </div>
 
@@ -42,7 +42,7 @@
       :dorama="dorama" 
       :usuarioAtual="usuarioLogado" 
       @fechar="fecharModal"
-      :avaliacaoExistente="dorama.ratings.find(r => r.nome === usuarioLogado)" 
+       
       @salvar-avaliacao="handleSalvarAvaliacao"
     />
   </div>
