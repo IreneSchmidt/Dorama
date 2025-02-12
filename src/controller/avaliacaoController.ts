@@ -1,5 +1,5 @@
 import { useAvaliacaoStore } from '../controller/store/avaliacaoStore';
-import { AvaliacaoRepository } from '.../model/repositories/AvaliacaoRepository';
+import { AvaliacaoRepository } from '../model/repositories/avaliacaoRepository.ts';
 
 export const salvarAvaliacao = async (avaliacao) => {
   const store = useAvaliacaoStore();

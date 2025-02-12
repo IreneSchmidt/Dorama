@@ -1,5 +1,5 @@
-import { Avaliacao } from '../generic/Avaliacao';
-import { enviarAvaliacaoParaApi } from '@/requires/api';
+import { Avaliacao } from '../Avaliacao';
+import { enviarAvaliacaoParaApi } from '../requires/api';
 
 export class AvaliacaoRepository {
   private avaliacoes: Avaliacao[] = [];

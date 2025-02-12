@@ -4,6 +4,7 @@
 
     <main class="main-content">
       <div v-if="dorama" class="dorama-detail">
+        <!-- Exibir a imagem do dorama -->
         <div class="dorama-image" :style="{ backgroundImage: `url(${dorama.image})` }"></div>
         <div class="dorama-info">
           <h1 class="dorama-title">{{ dorama.title }}</h1>
@@ -79,7 +80,7 @@ export default defineComponent({
     const doramas = ref([
       {
         id: '1',
-        image: 'Pousando_no_Amor.jpg',
+        image: '/images/Pousando_no_Amor.jpg', // Caminho absoluto da imagem
         title: 'Pousando No Amor',
         genre: 'Ação',
         description: '...',
@@ -89,7 +90,7 @@ export default defineComponent({
       },
       {
         id: '2',
-        image: 'Rainha_das_Lagrimas.jpg',
+        image: '/images/Rainha_das_Lagrimas.jpg', // Caminho absoluto da imagem
         title: 'Rainha das Lágrimas',
         genre: 'Romance',
         description: '...',
@@ -99,7 +100,7 @@ export default defineComponent({
       },
       {
         id: '3',
-        image: 'Round_6.jpeg',
+        image: '/images/Round_6.jpeg', // Caminho absoluto da imagem
         title: 'Round 6',
         genre: 'Suspense',
         description: '...',
