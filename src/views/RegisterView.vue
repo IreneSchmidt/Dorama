@@ -1,52 +1,69 @@
 <template>
-  <div class="auth-container">
-    <div class="auth-card">
-      <div class="auth-header">
-        <h2>Criar Nova Conta</h2>
-        <p>Junte-se à nossa comunidade de fãs de doramas</p>
+  <div class="home-container">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-brand">DoramaHub</div>
+      <div class="navbar-links">
+        <router-link to="/login" class="nav-link">Entrar</router-link>
+        <router-link to="/register" class="nav-button">Criar Conta</router-link>
       </div>
+    </nav>
 
-      <form @submit.prevent="handleRegister" class="auth-form">
-        <div class="form-group">
-          <label>Nome Completo</label>
-          <input 
-            type="text" 
-            v-model="userData.name"
-            placeholder="Seu nome completo"
-            class="input-field"
-          >
+    <!-- Registro -->
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h2>Criar Nova Conta</h2>
+          <p>Junte-se à nossa comunidade de fãs de doramas</p>
         </div>
 
-        <div class="form-group">
-          <label>Email</label>
-          <input 
-            type="email" 
-            v-model="userData.email"
-            placeholder="exemplo@email.com"
-            class="input-field"
-          >
-        </div>
+        <form @submit.prevent="handleRegister" class="auth-form">
+          <div class="form-group">
+            <label>Nome Completo</label>
+            <input 
+              type="text" 
+              v-model="userData.name"
+              placeholder="Seu nome completo"
+              class="input-field"
+            >
+          </div>
 
-        <div class="form-group">
-          <label>Senha</label>
-          <input 
-            type="password" 
-            v-model="userData.password"
-            placeholder="••••••••"
-            class="input-field"
-          >
-        </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input 
+              type="email" 
+              v-model="userData.email"
+              placeholder="exemplo@email.com"
+              class="input-field"
+            >
+          </div>
 
-        <button type="submit" class="auth-button">
-          <span v-if="!isLoading">Criar Conta</span>
-          <div v-else class="loader"></div>
-        </button>
+          <div class="form-group">
+            <label>Senha</label>
+            <input 
+              type="password" 
+              v-model="userData.password"
+              placeholder="••••••••"
+              class="input-field"
+            >
+          </div>
 
-        <p class="auth-link">
-          Já tem conta? <router-link to="/login">Faça login</router-link>
-        </p>
-      </form>
+          <button type="submit" class="auth-button">
+            <span v-if="!isLoading">Criar Conta</span>
+            <div v-else class="loader"></div>
+          </button>
+
+          <p class="auth-link">
+            Já tem conta? <router-link to="/login">Faça login</router-link>
+          </p>
+        </form>
+      </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>© 2024 DoramaHub. Todos os direitos reservados.</p>
+    </footer>
   </div>
 </template>
 
@@ -170,5 +187,13 @@ const handleRegister = async () => {
 
 .auth-link a:hover {
   text-decoration: underline;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  background: #2c3e50;
+  color: white;
+  margin-top: 2rem;
 }
 </style>
