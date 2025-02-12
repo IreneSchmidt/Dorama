@@ -40,8 +40,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { enviarAvaliacaoParaApi } from '@/services/requires/api'; 
-import ModalAvaliacao from '@/components/ModalAvaliacao.vue';  
+
+import ModalAvaliacao from '../../components/ModalAvaliacao.vue';  
 
 const doramaId = useRoute().params.id; // Obtendo o ID do dorama da URL
 const estrelas = ref(0);
@@ -67,7 +67,7 @@ const salvarAvaliacao = async () => {
 
   try {
     // Enviar a avaliação para a API
-    const resposta = await enviarAvaliacaoParaApi(avaliacao);
+    const resposta = await useAvaliacaoStore.adicionarAvaliacao(avaliacao);
     if (resposta) {
       // Após sucesso, limpar campos
       estrelas.value = 0;
