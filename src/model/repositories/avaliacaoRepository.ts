@@ -1,7 +1,7 @@
 import api from '../../services/api';
 import type { IAvaliacao } from '../Avaliacao';
 import { Avaliacao } from '../Avaliacao';
-import AvaliacaoRoutes from './apiRoutes/AvaliacaoRoutes';
+import { AvaliacaoRoutes } from './apiRoutes/AvaliacaoRoutes.ts';
 
 export default class AvaliacaoRepository {
   apiClient;
