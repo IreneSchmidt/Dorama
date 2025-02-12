@@ -79,30 +79,30 @@ export default defineComponent({
     const doramas = ref([
       {
         id: '1',
-        image: '/images/Pousando_no_Amor.jpg', // Caminho absoluto da imagem
+        image:`/Pousando_no_Amor.jpg`,
         title: 'Pousando No Amor',
         genre: 'Ação',
-        description: '...',
+        description: 'Um acidente de parapente leva uma herdeira sul-coreana à Coreia do Norte. Ali, ela acaba conhecendo um oficial do exército, que vai ajudá-la a se esconder.',
         episodes: 16,
         releaseDate: '2020-12-14',
         ratings: [] as Avaliacao[] // Usando Avaliacao
       },
       {
         id: '2',
-        image: '/images/Rainha_das_Lagrimas.jpg', // Caminho absoluto da imagem
+        image: `/Rainha_das_Lagrimas.jpg`,
         title: 'Rainha das Lágrimas',
         genre: 'Romance',
-        description: '...',
+        description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.',
         episodes: 20,
         releaseDate: '2021-03-01',
         ratings: [] as Avaliacao[] // Usando Avaliacao
       },
       {
         id: '3',
-        image: '/images/Round_6.jpeg', // Caminho absoluto da imagem
+        image: `/Round_6.jpeg`,
         title: 'Round 6',
         genre: 'Suspense',
-        description: '...',
+        description: 'Centenas de jogadores falidos aceitam um estranho convite para um jogo de sobrevivência. Um prêmio milionário aguarda, mas as apostas são altas e mortais.',
         episodes: 10,
         releaseDate: '2021-09-17',
         ratings: [] as Avaliacao[] // Usando Avaliacao

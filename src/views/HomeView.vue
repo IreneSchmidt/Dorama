@@ -99,10 +99,14 @@ export default defineComponent({
 }
 
 .page-title {
-  color: #2c3e50;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #104881;
   text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2.5rem;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .dorama-grid {

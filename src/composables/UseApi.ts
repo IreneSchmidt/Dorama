@@ -31,6 +31,8 @@ export default function useApi(url: string) {
     return data;
   };
 
+
+
   return {
     list,
     getById,

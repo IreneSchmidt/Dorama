@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <button type="submit">Cadastrar Dorama</button>
+      <button type="submit" @click="router.push('/')">Cadastrar Dorama</button>
     </form>
   </div>
 </template>
@@ -62,7 +62,7 @@ const cadastrarDorama = async () => {
   await doramaStore.addDorama(dorama.value);
   alert("Dorama cadastrado com sucesso!");
 
-  router.push({ name: "/home" });
+  router.push('/');
 
   dorama.value = {
     Id: crypto.randomUUID(),

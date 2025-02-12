@@ -1,5 +1,5 @@
 import { Avaliacao } from '../Avaliacao';
-import { enviarAvaliacaoParaApi } from '../requires/api';
+import api from '../../services/api';
 
 export class AvaliacaoRepository {
   private avaliacoes: Avaliacao[] = [];
@@ -11,7 +11,7 @@ export class AvaliacaoRepository {
 
     // Tenta enviar a avaliação para a API
     try {
-      await enviarAvaliacaoParaApi(avaliacao);
+      await api(avaliacao);
     } catch (error) {
       console.error('Erro ao enviar avaliação para API:', error);
     }
