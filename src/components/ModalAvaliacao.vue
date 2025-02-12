@@ -1,29 +1,42 @@
 <template>
   <div class="modal">
     <div class="modal-content">
+      <!-- Mensagem de Alerta Customizada de Erro -->
+      <p v-if="alertaVisivel" class="alert-message">Nenhuma avaliação foi realizada.</p>
+
+      <!-- Mensagem de Sucesso -->
+      <p v-if="avaliacaoSalva" class="success-message">Avaliação salva com sucesso!</p>
+
       <h2>{{ dorama.nome }}</h2>
 
-      <!-- Exibir a nota selecionada -->
-      <p><strong>Nota:</strong> {{ rating }}</p>
-
-      <!-- Componente para estrelas interativas -->
-      <div class="stars-container">
-        <EstrelasAvaliacao 
-          v-model="rating" 
-          :max="10"  
-        />
+      <!-- Seleção de Nota com Estrelas -->
+      <div class="nota-container">
+        <label for="nota"><strong>Nota:</strong></label>
+        <div class="stars">
+          <span 
+            v-for="n in 10" 
+            :key="n" 
+            class="star" 
+            :class="{ filled: n <= rating }"
+            @click="setRating(n)"
+          >
+            &#9733;
+          </span>
+        </div>
       </div>
 
+      <!-- Campo de Comentário -->
       <textarea 
         v-model="comentario" 
         placeholder="Deixe seu comentário..." 
         rows="4" 
       ></textarea>
 
-      <button @click="salvarAvaliacao">Salvar Avaliação</button>
-
-      <!-- Mensagem de sucesso -->
-      <p v-if="avaliacaoSalva" class="success-message">Avaliação salva com sucesso!</p>
+      <!-- Botões de Ação -->
+      <div class="botoes-container">
+        <button @click="salvarAvaliacao">Enviar Avaliação</button>
+        <button @click="fecharModal" class="cancelar">Cancelar</button>
+      </div>
 
       <!-- Fechar Modal com X -->
       <span class="close" @click="fecharModal">&times;</span>
@@ -32,19 +45,17 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import EstrelasAvaliacao from '@/components/EstrelasAvaliacao.vue'
-
-
+import { ref } from 'vue'
 
 const props = defineProps({
   dorama: Object,
   avaliacaoExistente: Object, // Recebe a avaliação existente
 })
 
-const rating = ref(props.avaliacaoExistente?.estrelas || 0) // Preenche com a nota existente, se houver
+const rating = ref(props.avaliacaoExistente?.estrelas || 0) // Preenche com 0 caso não haja avaliação existente
 const comentario = ref(props.avaliacaoExistente?.comentario || '') // Preenche com o comentário existente, se houver
 const avaliacaoSalva = ref(false) // Controle de mensagem de sucesso
+const alertaVisivel = ref(false) // Controle de exibição da mensagem de alerta
 
 const emit = defineEmits(['fechar', 'salvar-avaliacao'])
 
@@ -53,30 +64,42 @@ const fecharModal = () => {
 }
 
 const salvarAvaliacao = () => {
-  // Cria o objeto de avaliação
+  // Verifica se a avaliação não foi feita
+  if (rating.value === 0 && comentario.value.trim() === "") {
+    alertaVisivel.value = true // Exibe o alerta customizado
+    setTimeout(() => {
+      alertaVisivel.value = false // Esconde o alerta após 3 segundos
+    }, 3000)
+    return
+  }
+
   const avaliacao = {
-    id: props.avaliacaoExistente?.id || `id-${new Date().getTime()}`, // Mantém o ID existente ou gera um novo
+    id: props.avaliacaoExistente?.id || `id-${new Date().getTime()}`, 
     data: new Date().toISOString(),
     estrelas: rating.value,
     comentario: comentario.value,
-    doramaId: props.dorama.id, // ID do dorama
-    nome: 'Usuário Atual', // Substitua pelo nome do usuário logado
+    doramaId: props.dorama.id, 
+    nome: 'Usuário Atual',
   }
 
-  // Emite a avaliação para o componente pai
+  // Envia a avaliação ao componente pai para ser salva
   emit('salvar-avaliacao', avaliacao)
 
   // Exibe a mensagem de sucesso
   avaliacaoSalva.value = true
 
-  // Fecha o modal após 2 segundos
   setTimeout(() => {
+    // Fechar o modal após 2 segundos
     fecharModal()
   }, 2000)
 }
+
+const setRating = (n) => {
+  rating.value = n
+}
 </script>
 
-<style>
+<style scoped>
 .modal {
   position: fixed;
   top: 0;
@@ -87,6 +110,7 @@ const salvarAvaliacao = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
@@ -99,8 +123,25 @@ const salvarAvaliacao = () => {
   position: relative;
 }
 
-.stars-container {
+.nota-container {
   margin: 1rem 0;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  font-size: 2rem;
+  color: #f1c40f;
+  cursor: pointer;
+}
+
+.star {
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: #f39c12;
 }
 
 textarea {
@@ -112,20 +153,28 @@ textarea {
   font-size: 1rem;
 }
 
+.botoes-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
 button {
   background-color: #3498db;
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 25px;
-  margin: 1rem 0.5rem;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #2980b9;
+button.cancelar {
+  background-color: #e74c3c;
 }
 
-/* Estilo para o X (botão de fechar) */
+button:hover {
+  opacity: 0.9;
+}
+
 .close {
   position: absolute;
   top: 10px;
@@ -133,14 +182,37 @@ button:hover {
   font-size: 2rem;
   cursor: pointer;
   color: #333;
+  z-index: 1001;
 }
 
 .close:hover {
   color: #e74c3c;
 }
 
+/* Estilos para o alerta de sucesso */
 .success-message {
-  color: green;
+  background-color: #28a745;
+  color: white;
+  padding: 1rem;
+  border-radius: 5px;
   margin-top: 1rem;
+  text-align: center;
+}
+
+/* Estilos para o alerta de erro (mensagem de erro) */
+.alert-message {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+  border: 1px solid #e74c3c;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  display: block;
+  width: auto;
+  text-align: center;
+  z-index: 1001; /* Garante que o alerta fique acima de outros elementos */
 }
 </style>
