@@ -1,67 +1,123 @@
 <template>
-  <div class="auth-container">
-    <div class="auth-card">
-      <div class="auth-header">
-        <h2>Bem-vindo de Volta</h2>
-        <p>Acesse sua conta para continuar</p>
+  <div class="home-container">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-brand">DoramaHub</div>
+      <div class="navbar-links">
+        <router-link to="/login" class="nav-link">Entrar</router-link>
+        <router-link to="/register" class="nav-button">Criar Conta</router-link>
       </div>
+    </nav>
 
-      <form @submit.prevent="handleLogin" class="auth-form">
-        <div class="form-group">
-          <label>Email</label>
-          <input 
-            type="email" 
-            v-model="credentials.email"
-            placeholder="exemplo@email.com"
-            class="input-field"
-          >
+    <!-- Tela de Login -->
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h2>Bem-vindo de Volta</h2>
+          <p>Acesse sua conta para continuar</p>
         </div>
 
-        <div class="form-group">
-          <label>Senha</label>
-          <input 
-            type="password" 
-            v-model="credentials.password"
-            placeholder="••••••••"
-            class="input-field"
-          >
-        </div>
+        <form @submit.prevent="handleLogin" class="auth-form">
+          <div class="form-group">
+            <label>Email</label>
+            <input 
+              type="email" 
+              v-model="credentials.email"
+              placeholder="exemplo@email.com"
+              class="input-field"
+            />
+          </div>
 
-        <button type="submit" class="auth-button">
-          <span v-if="!isLoading">Entrar</span>
-          <div v-else class="loader"></div>
-        </button>
+          <div class="form-group">
+            <label>Senha</label>
+            <input 
+              type="password" 
+              v-model="credentials.password"
+              placeholder="••••••••"
+              class="input-field"
+            />
+          </div>
 
-        <p class="auth-link">
-          Novo aqui? <router-link to="/register">Crie uma conta</router-link>
-        </p>
-      </form>
+          <button type="submit" class="auth-button">
+            <span v-if="!isLoading">Entrar</span>
+            <div v-else class="loader"></div>
+          </button>
+
+          <p class="auth-link">
+            Novo aqui? <router-link to="/register">Crie uma conta</router-link>
+          </p>
+        </form>
+      </div>
     </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>© 2024 DoramaHub. Todos os direitos reservados.</p>
+    </footer>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
-const isLoading = ref(false)
+const router = useRouter();
+const isLoading = ref(false);
 const credentials = ref({
-  email: '',
-  password: ''
-})
+  email: "",
+  password: "",
+});
 
 const handleLogin = async () => {
-  isLoading.value = true
+  isLoading.value = true;
   setTimeout(() => {
-    localStorage.setItem('isAuthenticated', 'true')
-    router.push('/')
-    isLoading.value = false
-  }, 1500)
-}
+    localStorage.setItem("isAuthenticated", "true");
+    router.push("/");
+    isLoading.value = false;
+  }, 1500);
+};
 </script>
 
 <style scoped>
+/* Estilização da Navbar */
+.navbar {
+  background: #2c3e50;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-button {
+  background: #3498db;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+.nav-button:hover {
+  background: #2980b9;
+}
+
+/* Estilização da Tela de Login */
 .auth-container {
   min-height: 100vh;
   display: flex;
@@ -77,7 +133,7 @@ const handleLogin = async () => {
   width: 100%;
   max-width: 450px;
   padding: 2.5rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .auth-header {
@@ -87,7 +143,6 @@ const handleLogin = async () => {
 
 .auth-header h2 {
   color: #2c3e50;
-  margin-bottom: 0.5rem;
   font-size: 1.8rem;
 }
 
@@ -107,7 +162,6 @@ const handleLogin = async () => {
   border: 2px solid #e0e0e0;
   border-radius: 10px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
 }
 
 .input-field:focus {
@@ -119,12 +173,10 @@ const handleLogin = async () => {
   background: #3498db;
   color: white;
   padding: 1rem;
-  border: none;
   border-radius: 10px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .auth-button:hover {
@@ -138,12 +190,15 @@ const handleLogin = async () => {
   border-bottom-color: transparent;
   border-radius: 50%;
   animation: rotation 1s linear infinite;
-  margin: 0 auto;
 }
 
 @keyframes rotation {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .auth-link {

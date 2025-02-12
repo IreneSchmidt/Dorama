@@ -1,12 +1,6 @@
 <template>
   <div class="home-container">
-    <nav class="navbar">
-      <div class="navbar-brand">DoramaHub</div>
-      <div class="navbar-links">
-        <router-link to="/login" class="nav-link">Entrar</router-link>
-        <router-link to="/register" class="nav-button">Criar Conta</router-link>
-      </div>
-    </nav>
+    <Navbar /> <!-- Navbar importada aqui -->
 
     <main class="main-content">
       <h1 class="page-title">Doramas em Destaque</h1>
@@ -19,7 +13,7 @@
           @mouseover="hoverCard = dorama.id"
           @mouseleave="hoverCard = null"
         >
-          <router-link :to="`/dorama/${dorama.id}`"> <!-- Adiciona o link aqui -->
+          <router-link :to="`/dorama/${dorama.id}`"> 
             <div class="card-image" :style="{ backgroundImage: `url(${dorama.image})` }">
               <div class="rating-badge">
                 ⭐ {{ dorama.rating }}
@@ -35,22 +29,26 @@
       </div>
     </main>
 
-    <footer class="site-footer">
-      <p>© 2024 DoramaHub. Todos os direitos reservados.</p>
-    </footer>
+    <!-- Importando o Footer -->
+    <Footer />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import Navbar from '@/components/Navbar.vue';
+import Footer from '@/components/Footer.vue'; 
 
 export default defineComponent({
   name: 'HomePage',
+  components: {
+    Navbar,
+    Footer // Registre o Footer
+  },
   data() {
     return {
-      hoverCard: null as string | null, // Definindo explicitamente o tipo como string | null
+      hoverCard: null as string | null, 
       doramas: [
-        // Lista de doramas (exemplo)
         {
           id: '1',
           image: 'Pousando_no_Amor.jpg',
@@ -66,6 +64,14 @@ export default defineComponent({
           title: 'Rainha das Lágrimas',
           genre: 'Romance',
           description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.'
+        },
+        {
+          id: '3',
+          image: 'Round_6.jpeg',
+          rating: 9.5,
+          title: 'Round 6',
+          genre: 'Suspense',
+          description: 'Centenas de jogadores falidos aceitam um estranho convite para um jogo de sobrevivência. Um prêmio milionário aguarda, mas as apostas são altas e mortais.'
         }
       ]
     };
@@ -77,47 +83,6 @@ export default defineComponent({
 .home-container {
   min-height: 100vh;
   background: #f8f9fa;
-}
-
-.navbar {
-  background: #2c3e50;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.navbar-brand {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.navbar-links {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.nav-link {
-  color: #ecf0f1;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.nav-button {
-  background: #3498db;
-  color: white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 25px;
-  text-decoration: none;
-  transition: transform 0.2s ease;
-}
-
-.nav-button:hover {
-  transform: translateY(-2px);
 }
 
 .main-content {
@@ -154,7 +119,7 @@ export default defineComponent({
 }
 
 .card-image {
-  height: 250px;
+  height: 450px;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -176,14 +141,20 @@ export default defineComponent({
 }
 
 .dorama-title {
-  color: #2c3e50;
+  color: #104881;
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
 }
 
 .dorama-genre {
-  color: #3498db;
-  font-size: 0.9r
+  color: #041622;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
 }
 
+.dorama-description {
+  color: #090e18;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
 </style>
