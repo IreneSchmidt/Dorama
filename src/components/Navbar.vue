@@ -1,17 +1,16 @@
-
 <template>
   <nav class="navbar">
     <div class="container">
       <router-link to="/" class="logo">
-        <router-link to="/" class="btn-logo">HomeHub</router-link>
-
+        <span class="btn-logo">DoramaHub</span>
       </router-link>
+
       <div class="search-container">
-        <input 
-          type="text" 
-          v-model="searchQuery" 
-          placeholder="Pesquisar doramas..." 
-          class="search-bar"
+        <input
+            type="text"
+            v-model="searchQuery"
+            placeholder="Pesquisar doramas..."
+            class="search-bar"
         />
         <ul v-if="filteredDoramas.length > 0" class="search-results">
           <li v-for="dorama in filteredDoramas" :key="dorama.id">
@@ -20,10 +19,8 @@
         </ul>
       </div>
 
-
-
       <!-- Botão de Cadastro -->
-      <router-link to="/CadastrarDorama" class="btn-cadastrar">Cadastrar Dorama</router-link>
+      <router-link to="/cadastrardorama" class="btn-cadastrar">Cadastrar Dorama</router-link>
     </div>
   </nav>
 </template>
@@ -44,10 +41,10 @@ export default defineComponent({
 
     const filteredDoramas = computed(() => {
       return searchQuery.value
-        ? doramas.value.filter(dorama =>
-            dorama.title.toLowerCase().includes(searchQuery.value.toLowerCase())
+          ? doramas.value.filter(dorama =>
+              dorama.title.toLowerCase().includes(searchQuery.value.toLowerCase())
           )
-        : [];
+          : [];
     });
 
     const router = useRouter();
@@ -65,6 +62,7 @@ export default defineComponent({
   }
 });
 </script>
+
 <style scoped>
 .navbar {
   background: #2c3e50;
@@ -78,7 +76,7 @@ export default defineComponent({
   width: 100%;
 }
 
-/* Estilo do Nome do Site (HomeHub) */
+/* Logo Estilo */
 .btn-logo {
   font-family: 'Lobster', cursive;
   font-size: 2.5rem;
@@ -88,7 +86,7 @@ export default defineComponent({
 }
 
 .btn-logo:hover {
-  color: #ff4757; /* Cor rosa mais forte ao passar o mouse */
+  color: #ff4757;
 }
 
 /* Barra de Pesquisa */
@@ -106,6 +104,7 @@ export default defineComponent({
   border: 1px solid #ccc;
 }
 
+/* Resultados da Pesquisa */
 .search-results {
   position: absolute;
   background: white;
@@ -128,16 +127,18 @@ export default defineComponent({
   background: #f1f1f1;
 }
 
-/* Estilo dos Botões */
+/* Estilo do Botão Cadastrar */
 .btn-cadastrar {
-  font-size: 1.2rem;
+  font-family: 'Lobster', cursive; /* Usando a mesma fonte que o nome "DoramaHub" */
+  font-size: 1rem; /* Fonte ainda menor */
   font-weight: bold;
-  padding: 8px 16px;
+  padding: 5px 12px; /* Padding reduzido */
   background-color: #ff6f91; /* Cor rosa */
   color: white;
   border-radius: 5px;
   text-decoration: none;
   transition: background 0.3s ease, color 0.3s ease;
+  display: inline-block; /* Para garantir que o botão se comporte como um botão */
 }
 
 .btn-cadastrar:hover {
