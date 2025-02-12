@@ -21,14 +21,14 @@ export default class DoramaController {
 
   async update(Id: string, item: IDorama) {
     if (!Id.trim()) {
-      throw new Error('O ID do dorama é inválido.');
+      throw new Error('Dorama inválido.');
     }
     return await this.doramaRepository.updateDorama(Id, item);
   }
 
   async delete(Id: string) {
     if (!Id.trim()) {
-      throw new Error('O ID do dorama é inválido.');
+      throw new Error('Dorama inválido.');
     }
     return await this.doramaRepository.deleteDorama(Id);
   }

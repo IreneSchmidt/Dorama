@@ -24,7 +24,9 @@
 import { ref } from "vue";
 import { DoramaStore } from "../controller/store/DoramaStore";
 import GeneroSelect from "../components/GeneroSelect.vue";
+import { useRouter } from "vue-router"; // Importe o useRouter
 
+const router = useRouter(); // Instância do roteador
 const doramaStore = DoramaStore();
 
 const dorama = ref({
@@ -45,6 +47,9 @@ const cadastrarDorama = async () => {
   await doramaStore.addDorama(dorama.value);
   alert("Dorama cadastrado com sucesso!");
 
+  // Redireciona para a HomeView após o cadastro
+  router.push({ name: "/home" });
+
   // Limpa os campos após o cadastro
   dorama.value = {
     Id: crypto.randomUUID(),
@@ -56,6 +61,8 @@ const cadastrarDorama = async () => {
   };
 };
 </script>
+
+
 
 <style scoped>
 .container {
@@ -106,3 +113,6 @@ button:hover {
   background-color: #14273d;
 }
 </style>
+
+
+

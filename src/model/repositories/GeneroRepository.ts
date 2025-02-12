@@ -1,18 +1,22 @@
 import api from '../../services/api';
 import type { IGenero } from '../Genero';
 import { Genero } from '../Genero';
+import GeneroRoutes from './apiRoutes/GeneroRoutes'; // Importe a classe GeneroRoutes
 
 export default class GeneroRepository {
   apiDorama;
+  generoRoutes;
 
   constructor() {
     this.apiDorama = api;
+    this.generoRoutes = new GeneroRoutes({}); // Instancia a classe de rotas
   }
 
   async fetchAllGenero() {
     try {
-      // Faz a request para buscar todos os gêneros
-      const response = await this.apiDorama.get('genero');
+      // Usa a rota de listagem de gêneros
+      const listRoute = this.generoRoutes; // "api/genero"
+      const response = await this.apiDorama.get(listRoute);
 
       // Retorna os gêneros convertidos para objetos
       return response.data.value.map(
@@ -26,12 +30,15 @@ export default class GeneroRepository {
 
   async createGenero(form: IGenero) {
     try {
-      // Faz o POST enviando os dados do novo gênero
-      const response = await this.apiDorama.post('genero', form);
+      // Usa a rota de criação de gênero
+      const createRoute = this.generoRoutes.create; 
+      const response = await this.apiDorama.post(createRoute, form);
       return response.data;
     } catch (error) {
       console.error('Erro ao criar gênero', error);
       throw error;
     }
   }
+
+
 }
