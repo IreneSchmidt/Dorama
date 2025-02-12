@@ -31,16 +31,7 @@ export default function useApi(url: string) {
     return data;
   };
 
-  const buscarIdPorNome = async (nome: string, nomeCampo = 'Titulo') => {
-    try {
-      const lista = await list(); // Pega todos os registros
-      const encontrado = lista.find((item: any) => item[nomeCampo]?.toLowerCase() === nome.toLowerCase());
-      return encontrado ? encontrado.Id : null;
-    } catch (error) {
-      console.error(`Erro ao buscar ID pelo nome (${nome})`, error);
-      return null;
-    }
-  };
+
 
   return {
     list,
@@ -48,6 +39,5 @@ export default function useApi(url: string) {
     post,
     update,
     remove,
-    buscarIdPorNome, // Adicionado para buscar ID pelo nome
   };
 }

@@ -1,9 +1,15 @@
 import { useAvaliacaoStore } from '../controller/store/avaliacaoStore';
-import { AvaliacaoRepository } from '.../model/repositories/AvaliacaoRepository';
+import { AvaliacaoRepository } from '../model/repositories/avaliacaoRepository';
 
 export const salvarAvaliacao = async (avaliacao) => {
   const store = useAvaliacaoStore();
   const repository = new AvaliacaoRepository();
+
+  // Verifica se o modo MOCK está ativado
+  if (import.meta.env.VITE_MOCK === "true") {
+    store.adicionarAvaliacao(avaliacao); // Simula adicionar avaliação localmente
+    return;
+  }
 
   // Adiciona avaliação ao estado local da aplicação
   store.adicionarAvaliacao(avaliacao);

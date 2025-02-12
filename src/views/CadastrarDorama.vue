@@ -1,7 +1,11 @@
 <template>
   <div class="wrapper">
+    <Navbar /> <!-- Navbar importada aqui -->
+
     <CadastrarDorama />
   </div>
+  <Footer />
+
 </template>
 
 <script>
@@ -15,7 +19,6 @@ export default {
 </script>
 
 <style scoped>
-/* Garante que a tela toda seja ocupada corretamente */
 .wrapper {
   display: flex;
   flex-direction: column;
