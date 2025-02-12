@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar">
     <div class="container">
-      <h1 class="logo">DoramaHub</h1>
+      <router-link to="/" class="logo">
+        DoramaHub
+      </router-link>
       <div class="search-container">
         <input 
           type="text" 
@@ -16,19 +18,7 @@
         </ul>
       </div>
 
-      <!-- Nome do Site com Link para HomeView -->
-      <router-link to="/" class="logo">
-        DoramaHub
-      </router-link>
 
-      <!-- Barra de Pesquisa -->
-      <input
-        type="text"
-        placeholder="Pesquisar doramas..."
-        class="search-bar"
-        v-model="searchQuery"
-        @keyup.enter="performSearch"
-      />
 
       <!-- Botão de Cadastro -->
       <button class="btn">Cadastrar Dorama</button>
