@@ -5,3 +5,4 @@ node_modules/
 *.log
 package-lock.json
 !.vscode/extensions.json
+src/controller/.idea/

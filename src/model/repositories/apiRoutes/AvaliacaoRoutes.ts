@@ -1,7 +1,27 @@
-import api from '../../services/api';
+import api from '@/services/api';
 import type { IAvaliacao } from '../Avaliacao';
 import { Avaliacao } from '../Avaliacao';
 import AvaliacaoRoutes from './apiRoutes/AvaliacaoRoutes';
+import type { BaseConfig } from "./BaseConfig";
+
+class AvaliacaoRoutes {
+    protected config: BaseConfig;
+    protected name: string;
+    constructor(config: BaseConfig) {
+        this.config = config;
+        this.name = 'avaliacao';
+    };
+
+    get entity(): string {
+        return `${this.name}`;
+    };
+
+    get delete(): string {
+        return `${this.name}/${this.config.id}`;
+    };
+};
+
+export default AvaliacaoRoutes;
 
 export default class AvaliacaoRepository {
   apiClient;
@@ -19,11 +39,14 @@ export default class AvaliacaoRepository {
 
   async fetchAllAvaliacao() {
     try {
+      // Criar rota de conexão
       const baseRoute = this.createBaseRoute();
 
+      // Faz a request usando a api com o axios
       const response = await this.apiClient.get(baseRoute);
 
-      return response.data.value.map((avaliacao: IAvaliacao) => new Avaliacao(avaliacao.id, avaliacao.data, avaliacao.nota, avaliacao.comentario));
+      // Retorna a função com a criação de objetos
+      return response.data.value.map((avaliacao: IAvaliacao) => new Avaliacao(avaliacao.Id, avaliacao.Nome, avaliacao.Nota, avaliacao.Comentario));
     } catch (error) {
       console.error("Erro ao buscar avaliações", error);
       throw error;
@@ -32,10 +55,13 @@ export default class AvaliacaoRepository {
 
   async createAvaliacao(form: IAvaliacao) {
     try {
+      // Criar rota de conexão
       const baseRoute = this.createBaseRoute();
 
+      // Faz o post usando a api com o axios e enviando os dados
       const response = await this.apiClient.post(baseRoute, form);
 
+      // Retorna a resposta do backend
       return response;
     } catch (error) {
       console.error("Erro ao criar avaliação", error);
@@ -43,14 +69,18 @@ export default class AvaliacaoRepository {
     }
   }
 
-  async updateAvaliacao(id: string, form: IAvaliacao) {
+  async updateAvaliacao(Id: string, form: IAvaliacao) {
     try {
+      // Criar rota de conexão
       const baseRoute = this.createBaseRoute();
 
-      form.id = id;
+      // Garante que o Id está salvo dentro do form
+      form.Id = Id;
 
+      // Faz o put usando a api com o axios e enviando os dados
       const response = await this.apiClient.put(baseRoute, form);
 
+      // Retorna a resposta do backend
       return response;
     } catch (error) {
       console.error("Erro ao atualizar avaliação", error);
@@ -58,12 +88,15 @@ export default class AvaliacaoRepository {
     }
   }
 
-  async deleteAvaliacao(id: string) {
+  async deleteAvaliacao(Id: string) {
     try {
-      const deleteRoute = this.createDeleteRoute(id);
+      // Criar rota de conexão
+      const deleteRoute = this.createDeleteRoute(Id);
 
+      // Faz o delete usando a api com o axios e enviando os dados
       const response = await this.apiClient.delete(deleteRoute);
 
+      // Retorna a resposta do backend
       return response;
     } catch (error) {
       console.error("Erro ao deletar a avaliação", error);
