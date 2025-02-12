@@ -11,7 +11,7 @@ export default function useApi(url: string) {
       const response = await api.get(`${url}/${id}`);
       return response.data;
     }
-    const response = await api.get(url);
+    const response = await api.get(`${url}`);
     return response.data;
   };
 

@@ -1,5 +1,3 @@
-import type { IEntity } from "../model/generic/IEntity"; 
-
 export interface IDorama  {
     Id: string;
     Titulo: string;
@@ -11,15 +9,14 @@ export interface IDorama  {
 
 export class Dorama implements IDorama {
     public constructor (
-        public Id: string = '', // Valor default vazio
-        public Titulo: string = '',
-        public Descricao: string = '',
-        public DataLancamento: string = '',
-        public QtdEpisodios: number = 1, // Pode definir um valor padrão
-        public Generos: string[] = [] // Lista vazia como padrão
+        public Id: string, 
+        public Titulo: string,
+        public Descricao: string,
+        public DataLancamento: string,
+        public QtdEpisodios: number, 
+        public Generos: string[],
     ) {
-        // Nada a mais aqui, o TS já vai garantir os tipos.
-    
+
         this.Id = Id;
         this.Titulo = Titulo;
         this.Descricao = Descricao;
