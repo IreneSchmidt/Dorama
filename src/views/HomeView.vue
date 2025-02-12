@@ -7,7 +7,8 @@
       
       <div class="dorama-grid">
         <div 
-          v-for="dorama in doramas" 
+          v-for="dorama in doramas"
+          
           :key="dorama.id" 
           class="dorama-card"
           @mouseover="hoverCard = dorama.id"
@@ -47,7 +48,7 @@ export default defineComponent({
   },
   data() {
     return {
-      hoverCard: null as string | null, 
+      hoverCard: null as string | null,
       doramas: [
         {
           id: '1',
@@ -55,7 +56,9 @@ export default defineComponent({
           rating: 10,
           title: 'Pousando No Amor',
           genre: 'Ação',
-          description: 'Um acidente de parapente leva uma herdeira sul-coreana à Coreia do Norte. Ali, ela acaba conhecendo um oficial do exército, que vai ajudá-la a se esconder.'
+          description: 'Um acidente de parapente leva uma herdeira sul-coreana à Coreia do Norte. Ali, ela acaba conhecendo um oficial do exército, que vai ajudá-la a se esconder.',
+          episodes: 16,
+          releaseDate: '2020-12-14'
         },
         {
           id: '2',
@@ -63,7 +66,9 @@ export default defineComponent({
           rating: 9.5,
           title: 'Rainha das Lágrimas',
           genre: 'Romance',
-          description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.'
+          description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.',
+          episodes: 20,
+          releaseDate: '2021-03-01'
         },
         {
           id: '3',
@@ -71,7 +76,9 @@ export default defineComponent({
           rating: 9.5,
           title: 'Round 6',
           genre: 'Suspense',
-          description: 'Centenas de jogadores falidos aceitam um estranho convite para um jogo de sobrevivência. Um prêmio milionário aguarda, mas as apostas são altas e mortais.'
+          description: 'Centenas de jogadores falidos aceitam um estranho convite para um jogo de sobrevivência. Um prêmio milionário aguarda, mas as apostas são altas e mortais.',
+          episodes: 10,
+          releaseDate: '2021-09-17'
         }
       ]
     };

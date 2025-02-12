@@ -5,7 +5,7 @@ import HomeView from '../views/HomeView.vue' // 👈 Corrigido
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AvaliarDorama from '../views/generic/AvaliarDorama.vue';
-import doramaEspecifico from '../views/generic/doramaEspecifico.vue';
+import DoramaDetail from '../views/generic/DoramaDetail.vue';
 
 
 
@@ -33,8 +33,8 @@ const routes = [
   },
   {
     path: '/dorama/:id',
-    name: 'DoramaEspecifico',
-    component: doramaEspecifico
+    name: 'DoramaDetail',
+    component: DoramaDetail
   }
 
 ]
