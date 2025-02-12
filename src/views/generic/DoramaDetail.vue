@@ -83,7 +83,7 @@ export default defineComponent({
         image:`/Pousando_no_Amor.jpg`,
         title: 'Pousando No Amor',
         genre: 'Ação',
-        description: 'Yoon Se-ri, uma herdeira sul-coreana cai acidentalmente na Coreia do Norte após um acidente de parapente. Lá, ela é protegida por um oficial do exército, e apesar das diferenças, os dois acabam se apaixonando.',
+        description: 'Um acidente de parapente leva uma herdeira sul-coreana à Coreia do Norte. Ali, ela acaba conhecendo um oficial do exército, que vai ajudá-la a se esconder.',
         episodes: 16,
         releaseDate: '2020-12-14',
         ratings: [] as Avaliacao[] // Usando Avaliacao
@@ -93,17 +93,17 @@ export default defineComponent({
         image: `/Rainha_das_Lagrimas.jpg`,
         title: 'Rainha das Lágrimas',
         genre: 'Romance',
-        description: 'Um casal em crise descobre que o amor ainda existe entre eles. Enquanto enfrentam desafios e traições, seu relacionamento é testado de maneiras inesperadas.',
+        description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.',
         episodes: 20,
         releaseDate: '2021-03-01',
         ratings: [] as Avaliacao[] // Usando Avaliacao
       },
       {
         id: '3',
-        image: `/Round_6.jpg`,
+        image: `/Round_6.jpeg`,
         title: 'Round 6',
         genre: 'Suspense',
-        description: 'Centenas de pessoas endividadas participam de jogos infantis mortais em busca de um prêmio bilionário. Apenas um pode sobreviver e levar o dinheiro.',
+        description: 'Centenas de jogadores falidos aceitam um estranho convite para um jogo de sobrevivência. Um prêmio milionário aguarda, mas as apostas são altas e mortais.',
         episodes: 10,
         releaseDate: '2021-09-17',
         ratings: [] as Avaliacao[] // Usando Avaliacao
