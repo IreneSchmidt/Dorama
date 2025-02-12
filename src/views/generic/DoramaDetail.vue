@@ -53,15 +53,15 @@ import { defineComponent, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
-import ModalAvaliacao from '@/components/ModalAvaliacao.vue'; // Importando o ModalAvaliacao
+import ModalAvaliacao from '@/components/ModalAvaliacao.vue'; 
 
 // Definindo a interface Avaliacao
 interface Avaliacao {
-  id: string;       // ID da avaliação
-  user: string;     // Nome do usuário
-  score: number;    // Nota de 1 a 10
-  comment: string;  // Comentário da avaliação
-  data: string;     // Data da avaliação
+  id: string;       
+  user: string;     
+  score: number;    
+  comment: string;  
+  data: string;     
 }
 
 export default defineComponent({
@@ -69,7 +69,7 @@ export default defineComponent({
   components: {
     Navbar,
     Footer,
-    ModalAvaliacao // Registrando o componente ModalAvaliacao
+    ModalAvaliacao 
   },
   setup() {
     const route = useRoute();
@@ -85,8 +85,7 @@ export default defineComponent({
         description: 'Um acidente de parapente leva uma herdeira sul-coreana à Coreia do Norte. Ali, ela acaba conhecendo um oficial do exército, que vai ajudá-la a se esconder.',
         episodes: 16,
         releaseDate: '2020-12-14',
-        ratings: [] as Avaliacao[] // Usando Avaliacao
-      },
+        ratings: [] as Avaliacao[] 
       {
         id: '2',
         image: `/Rainha_das_Lagrimas.jpg`,
@@ -95,7 +94,7 @@ export default defineComponent({
         description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.',
         episodes: 20,
         releaseDate: '2021-03-01',
-        ratings: [] as Avaliacao[] // Usando Avaliacao
+        ratings: [] as Avaliacao[] 
       },
       {
         id: '3',
@@ -105,11 +104,10 @@ export default defineComponent({
         description: 'Centenas de jogadores falidos aceitam um estranho convite para um jogo de sobrevivência. Um prêmio milionário aguarda, mas as apostas são altas e mortais.',
         episodes: 10,
         releaseDate: '2021-09-17',
-        ratings: [] as Avaliacao[] // Usando Avaliacao
+        ratings: [] as Avaliacao[] 
       }
     ]);
 
-    // Computando o dorama com base no ID da rota
     const dorama = computed(() => {
       const found = doramas.value.find(d => d.id === doramaId);
       if (!found) {
@@ -119,10 +117,10 @@ export default defineComponent({
     });
 
     const showRatingModal = ref(false);
-    const avaliacaoSalva = ref(false); // Controle da mensagem de sucesso
+    const avaliacaoSalva = ref(false); 
 
     // Simulação de usuário logado
-    const usuarioLogado = ref('João Silva');  // Substitua isso pelo nome do usuário logado no seu sistema
+    const usuarioLogado = ref('João Silva');  
 
     // Função para fechar o modal
     const fecharModal = () => {
@@ -153,7 +151,7 @@ export default defineComponent({
       fecharModal,
       handleSalvarAvaliacao,
       avaliacaoSalva,
-      usuarioLogado // Passando o usuário logado para o template
+      usuarioLogado 
     };
   }
 });

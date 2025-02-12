@@ -50,7 +50,7 @@ import { ref } from 'vue'
 const props = defineProps({
   dorama: Object,
   avaliacaoExistente: Object,
-  usuarioAtual: String, // Adicione esta propriedade
+  usuarioAtual: String, 
 })
 
 const rating = ref(props.avaliacaoExistente?.estrelas || 0)
@@ -77,7 +77,7 @@ const salvarAvaliacao = () => {
     estrelas: rating.value,
     comentario: comentario.value,
     doramaId: props.dorama.id, 
-    nome: props.usuarioAtual || 'Anônimo', // Usa o nome correto do usuário
+    nome: props.usuarioAtual || 'Anônimo', 
   }
 
   avaliacaoSalva.value = true
@@ -184,7 +184,7 @@ button:hover {
   color: #e74c3c;
 }
 
-/* Estilos para o alerta de sucesso */
+
 .success-message {
   background-color: #28a745;
   color: white;
@@ -194,7 +194,7 @@ button:hover {
   text-align: center;
 }
 
-/* Estilos para o alerta de erro (mensagem de erro) */
+
 .alert-message {
   position: absolute;
   top: 5%;
