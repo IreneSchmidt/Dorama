@@ -49,13 +49,14 @@ import { ref } from 'vue'
 
 const props = defineProps({
   dorama: Object,
-  avaliacaoExistente: Object, // Recebe a avaliação existente
+  avaliacaoExistente: Object,
+  usuarioAtual: String, // Adicione esta propriedade
 })
 
-const rating = ref(props.avaliacaoExistente?.estrelas || 0) // Preenche com 0 caso não haja avaliação existente
-const comentario = ref(props.avaliacaoExistente?.comentario || '') // Preenche com o comentário existente, se houver
-const avaliacaoSalva = ref(false) // Controle de mensagem de sucesso
-const alertaVisivel = ref(false) // Controle de exibição da mensagem de alerta
+const rating = ref(props.avaliacaoExistente?.estrelas || 0)
+const comentario = ref(props.avaliacaoExistente?.comentario || '')
+const avaliacaoSalva = ref(false)
+const alertaVisivel = ref(false)
 
 const emit = defineEmits(['fechar', 'salvar-avaliacao'])
 
@@ -64,12 +65,9 @@ const fecharModal = () => {
 }
 
 const salvarAvaliacao = () => {
-  // Verifica se a avaliação não foi feita
   if (rating.value === 0 && comentario.value.trim() === "") {
-    alertaVisivel.value = true // Exibe o alerta customizado
-    setTimeout(() => {
-      alertaVisivel.value = false // Esconde o alerta após 3 segundos
-    }, 3000)
+    alertaVisivel.value = true
+    setTimeout(() => { alertaVisivel.value = false }, 3000)
     return
   }
 
@@ -79,25 +77,22 @@ const salvarAvaliacao = () => {
     estrelas: rating.value,
     comentario: comentario.value,
     doramaId: props.dorama.id, 
-    nome: 'Usuário Atual',
+    nome: props.usuarioAtual || 'Anônimo', // Usa o nome correto do usuário
   }
 
-  // Envia a avaliação ao componente pai para ser salva
-  emit('salvar-avaliacao', avaliacao)
-
-  // Exibe a mensagem de sucesso
   avaliacaoSalva.value = true
 
   setTimeout(() => {
-    // Fechar o modal após 2 segundos
     fecharModal()
-  }, 2000)
+  }, 1000)
+
 }
 
 const setRating = (n) => {
   rating.value = n
 }
 </script>
+
 
 <style scoped>
 .modal {
@@ -202,17 +197,18 @@ button:hover {
 /* Estilos para o alerta de erro (mensagem de erro) */
 .alert-message {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: #e74c3c;
   background-color: rgba(231, 76, 60, 0.1);
   border: 1px solid #e74c3c;
-  padding: 1rem;
+  padding: 0.25rem;
   border-radius: 8px;
   font-weight: bold;
-  display: block;
-  width: auto;
   text-align: center;
-  z-index: 1001; /* Garante que o alerta fique acima de outros elementos */
+  z-index: 1001;
+  width: 80%;
+  max-width: 300px;
 }
 </style>

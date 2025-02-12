@@ -16,17 +16,14 @@
           <div class="ratings-section">
             <h2>Avaliações</h2>
             <div v-for="rating in dorama.ratings" :key="rating.id" class="rating-item">
-              <p>{{ rating.user }}: {{ rating.comment }} (⭐ {{ rating.score }})</p>
+              <p>{{ rating.nome }}: {{ rating.comentario }} (⭐ {{ rating.estrelas }})</p>
             </div>
           </div>
-          <div v-if="!dorama">
-  <p>Dorama não encontrado.</p>
-</div>
-
 
           <button @click="showRatingModal = true" class="rate-button">Avaliar</button>
         </div>
       </div>
+
       <div v-else>
         <p>Dorama não encontrado.</p>
       </div>
@@ -43,7 +40,9 @@
     <ModalAvaliacao 
       v-if="showRatingModal" 
       :dorama="dorama" 
-      @fechar="fecharModal" 
+      :usuarioAtual="usuarioLogado" 
+      @fechar="fecharModal"
+      :avaliacaoExistente="dorama.ratings.find(r => r.nome === usuarioLogado)" 
       @salvar-avaliacao="handleSalvarAvaliacao"
     />
   </div>
@@ -122,6 +121,9 @@ export default defineComponent({
     const showRatingModal = ref(false);
     const avaliacaoSalva = ref(false); // Controle da mensagem de sucesso
 
+    // Simulação de usuário logado
+    const usuarioLogado = ref('João Silva');  // Substitua isso pelo nome do usuário logado no seu sistema
+
     // Função para fechar o modal
     const fecharModal = () => {
       showRatingModal.value = false;
@@ -150,7 +152,8 @@ export default defineComponent({
       showRatingModal,
       fecharModal,
       handleSalvarAvaliacao,
-      avaliacaoSalva
+      avaliacaoSalva,
+      usuarioLogado // Passando o usuário logado para o template
     };
   }
 });
