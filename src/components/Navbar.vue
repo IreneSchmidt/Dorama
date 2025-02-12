@@ -1,8 +1,10 @@
+
 <template>
   <nav class="navbar">
     <div class="container">
       <router-link to="/" class="logo">
-        DoramaHub
+        <router-link to="/" class="btn-logo">HomeHub</router-link>
+
       </router-link>
       <div class="search-container">
         <input 
@@ -21,7 +23,7 @@
 
 
       <!-- Botão de Cadastro -->
-      <button class="btn">Cadastrar Dorama</button>
+      <router-link to="/CadastrarDorama" class="btn-cadastrar">Cadastrar Dorama</router-link>
     </div>
   </nav>
 </template>
@@ -63,7 +65,6 @@ export default defineComponent({
   }
 });
 </script>
-
 <style scoped>
 .navbar {
   background: #2c3e50;
@@ -77,33 +78,26 @@ export default defineComponent({
   width: 100%;
 }
 
+/* Estilo do Nome do Site (HomeHub) */
+.btn-logo {
+  font-family: 'Lobster', cursive;
+  font-size: 2.5rem;
+  color: #ff6f91; /* Cor rosa para o texto */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.btn-logo:hover {
+  color: #ff4757; /* Cor rosa mais forte ao passar o mouse */
+}
+
+/* Barra de Pesquisa */
 .search-container {
   position: relative;
   flex-grow: 1;
   max-width: 600px;
 }
 
-.search-bar {
-  padding: 6px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Estilo do Nome do Site (DoramaHub) */
-.logo {
-  font-family: 'Lobster', cursive;
-  font-size: 2.5rem;
-  color: #ff6f91;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.logo:hover {
-  color: #ff4757;
-}
-
-/* Barra de Pesquisa */
 .search-bar {
   padding: 8px;
   width: 400px;
@@ -134,16 +128,19 @@ export default defineComponent({
   background: #f1f1f1;
 }
 
-.btn {
+/* Estilo dos Botões */
+.btn-cadastrar {
+  font-size: 1.2rem;
+  font-weight: bold;
   padding: 8px 16px;
-  background-color: #ff6f91;
+  background-color: #ff6f91; /* Cor rosa */
   color: white;
-  border: none;
   border-radius: 5px;
-  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.btn:hover {
-  background-color: #ff4757;
+.btn-cadastrar:hover {
+  background-color: #ff4757; /* Cor rosa mais forte ao passar o mouse */
 }
 </style>
