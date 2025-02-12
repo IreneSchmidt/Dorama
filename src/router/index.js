@@ -4,9 +4,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue' // 👈 Corrigido
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
+
 import AvaliarDorama from '../views/generic/AvaliarDorama.vue';
 import DoramaDetail from '../views/generic/DoramaDetail.vue';
 
+
+
+import CadastrarDorama from '../views/CadastrarDorama.vue';
 
 
 
@@ -35,8 +39,13 @@ const routes = [
     path: '/dorama/:id',
     name: 'DoramaDetail',
     component: DoramaDetail
-  }
+  },
+  {
 
+    path: '/CadastrarDorama',
+    name: 'CadastrarDorama',
+    component: CadastrarDorama,
+  },
 ]
 
 const router = createRouter({
