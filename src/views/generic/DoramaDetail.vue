@@ -79,16 +79,18 @@ export default defineComponent({
     const doramas = ref([
       {
         id: '1',
-        image:`/Pousando_no_Amor.jpg`,
+        image: `/Pousando_no_Amor.jpg`,
         title: 'Pousando No Amor',
         genre: 'Ação',
         description: 'Um acidente de parapente leva uma herdeira sul-coreana à Coreia do Norte. Ali, ela acaba conhecendo um oficial do exército, que vai ajudá-la a se esconder.',
         episodes: 16,
         releaseDate: '2020-12-14',
-        ratings: [] as Avaliacao[] 
+        ratings: [] as Avaliacao[]
+      },
       {
         id: '2',
         image: `/Rainha_das_Lagrimas.jpg`,
+
         title: 'Rainha das Lágrimas',
         genre: 'Romance',
         description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.',
