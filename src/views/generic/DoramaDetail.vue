@@ -23,7 +23,6 @@
           <button @click="showRatingModal = true" class="rate-button">Avaliar</button>
         </div>
       </div>
-
       <div v-else>
         <p>Dorama não encontrado.</p>
       </div>
@@ -37,13 +36,11 @@
     <Footer />
 
     <!-- Modal de Avaliação -->
-    <ModalAvaliacao 
-      v-if="showRatingModal" 
-      :dorama="dorama" 
-      :usuarioAtual="usuarioLogado" 
-      @fechar="fecharModal"
-       
-      @salvar-avaliacao="handleSalvarAvaliacao"
+    <ModalAvaliacao
+        v-if="showRatingModal"
+        :dorama="dorama"
+        @fechar="fecharModal"
+        @salvar-avaliacao="handleSalvarAvaliacao"
     />
   </div>
 </template>
@@ -53,15 +50,15 @@ import { defineComponent, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
-import ModalAvaliacao from '@/components/ModalAvaliacao.vue'; 
+import ModalAvaliacao from '@/components/ModalAvaliacao.vue'; // Importando o ModalAvaliacao
 
 // Definindo a interface Avaliacao
 interface Avaliacao {
-  id: string;       
-  user: string;     
-  score: number;    
-  comment: string;  
-  data: string;     
+  id: string;       // ID da avaliação
+  user: string;     // Nome do usuário
+  score: number;    // Nota de 1 a 10
+  comment: string;  // Comentário da avaliação
+  data: string;     // Data da avaliação
 }
 
 export default defineComponent({
@@ -69,7 +66,7 @@ export default defineComponent({
   components: {
     Navbar,
     Footer,
-    ModalAvaliacao 
+    ModalAvaliacao // Registrando o componente ModalAvaliacao
   },
   setup() {
     const route = useRoute();
@@ -79,24 +76,23 @@ export default defineComponent({
     const doramas = ref([
       {
         id: '1',
-        image: `/Pousando_no_Amor.jpg`,
+        image:`/Pousando_no_Amor.jpg`,
         title: 'Pousando No Amor',
         genre: 'Ação',
         description: 'Um acidente de parapente leva uma herdeira sul-coreana à Coreia do Norte. Ali, ela acaba conhecendo um oficial do exército, que vai ajudá-la a se esconder.',
         episodes: 16,
         releaseDate: '2020-12-14',
-        ratings: [] as Avaliacao[]
+        ratings: [] as Avaliacao[] // Usando Avaliacao
       },
       {
         id: '2',
         image: `/Rainha_das_Lagrimas.jpg`,
-
         title: 'Rainha das Lágrimas',
         genre: 'Romance',
         description: 'A rainha das lojas de departamento e seu marido do interior enfrentam uma crise conjugal. Até que o amor milagrosamente volta a florescer.',
         episodes: 20,
         releaseDate: '2021-03-01',
-        ratings: [] as Avaliacao[] 
+        ratings: [] as Avaliacao[] // Usando Avaliacao
       },
       {
         id: '3',
@@ -106,10 +102,11 @@ export default defineComponent({
         description: 'Centenas de jogadores falidos aceitam um estranho convite para um jogo de sobrevivência. Um prêmio milionário aguarda, mas as apostas são altas e mortais.',
         episodes: 10,
         releaseDate: '2021-09-17',
-        ratings: [] as Avaliacao[] 
+        ratings: [] as Avaliacao[] // Usando Avaliacao
       }
     ]);
 
+    // Computando o dorama com base no ID da rota
     const dorama = computed(() => {
       const found = doramas.value.find(d => d.id === doramaId);
       if (!found) {
@@ -119,10 +116,7 @@ export default defineComponent({
     });
 
     const showRatingModal = ref(false);
-    const avaliacaoSalva = ref(false); 
-
-    // Simulação de usuário logado
-    const usuarioLogado = ref('João Silva');  
+    const avaliacaoSalva = ref(false); // Controle da mensagem de sucesso
 
     // Função para fechar o modal
     const fecharModal = () => {
@@ -132,15 +126,20 @@ export default defineComponent({
     // Função para lidar com a avaliação salva
     const handleSalvarAvaliacao = (avaliacao: Avaliacao) => {
       if (dorama.value) {
+        // Criar a nova avaliação com um id único
         const novaAvaliacao: Avaliacao = {
           ...avaliacao,
           id: (dorama.value.ratings.length + 1).toString(),
           data: new Date().toISOString(),
         };
 
+        // Adiciona a avaliação à lista do dorama
         dorama.value.ratings.push(novaAvaliacao);
+
+        // Exibe a mensagem de sucesso
         avaliacaoSalva.value = true;
 
+        // Limpa a mensagem de sucesso após 2 segundos
         setTimeout(() => {
           avaliacaoSalva.value = false;
         }, 2000);
@@ -152,8 +151,7 @@ export default defineComponent({
       showRatingModal,
       fecharModal,
       handleSalvarAvaliacao,
-      avaliacaoSalva,
-      usuarioLogado 
+      avaliacaoSalva
     };
   }
 });

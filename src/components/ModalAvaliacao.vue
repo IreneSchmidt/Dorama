@@ -1,214 +1,112 @@
 <template>
-  <div class="modal">
+  <div class="modal-overlay">
     <div class="modal-content">
-      <!-- Mensagem de Alerta Customizada de Erro -->
-      <p v-if="alertaVisivel" class="alert-message">Nenhuma avaliação foi realizada.</p>
-
-      <!-- Mensagem de Sucesso -->
-      <p v-if="avaliacaoSalva" class="success-message">Avaliação salva com sucesso!</p>
-
-      <h2>{{ dorama.nome }}</h2>
-
-      <!-- Seleção de Nota com Estrelas -->
-      <div class="nota-container">
-        <label for="nota"><strong>Nota:</strong></label>
-        <div class="stars">
-          <span 
-            v-for="n in 10" 
-            :key="n" 
-            class="star" 
-            :class="{ filled: n <= rating }"
-            @click="setRating(n)"
-          >
-            &#9733;
-          </span>
+      <h3>Avalie o Dorama</h3>
+      <form @submit.prevent="submitAvaliar">
+        <div class="input-group">
+          <label for="comentario">Comentário</label>
+          <textarea v-model="comentario" id="comentario" placeholder="Escreva seu comentário..." required></textarea>
         </div>
-      </div>
 
-      <!-- Campo de Comentário -->
-      <textarea 
-        v-model="comentario" 
-        placeholder="Deixe seu comentário..." 
-        rows="4" 
-      ></textarea>
+        <div class="input-group">
+          <label for="estrelas">Nota (1 a 10)</label>
+          <input
+              v-model="estrelas"
+              type="number"
+              id="estrelas"
+              min="1"
+              max="10"
+              required
+          />
+        </div>
 
-      <!-- Botões de Ação -->
-      <div class="botoes-container">
-        <button @click="salvarAvaliacao">Enviar Avaliação</button>
-        <button @click="fecharModal" class="cancelar">Cancelar</button>
-      </div>
-
-      <!-- Fechar Modal com X -->
-      <span class="close" @click="fecharModal">&times;</span>
+        <button type="submit">Salvar Avaliação</button>
+      </form>
+      <button @click="fecharModal">Fechar</button>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 
-const props = defineProps({
-  dorama: Object,
-  avaliacaoExistente: Object,
-  usuarioAtual: String, 
-})
+export default defineComponent({
+  name: 'ModalAvaliacao',
+  props: {
+    dorama: Object
+  },
+  setup(props, { emit }) {
+    const comentario = ref('');
+    const estrelas = ref(0);
 
-const rating = ref(props.avaliacaoExistente?.estrelas || 0)
-const comentario = ref(props.avaliacaoExistente?.comentario || '')
-const avaliacaoSalva = ref(false)
-const alertaVisivel = ref(false)
+    const fecharModal = () => {
+      emit('fechar');
+    };
 
-const emit = defineEmits(['fechar', 'salvar-avaliacao'])
+    const submitAvaliar = () => {
+      if (estrelas.value >= 1 && estrelas.value <= 10) {
+        const avaliacao = {
+          user: 'Usuário', // Aqui você pode personalizar com o nome do usuário
+          score: estrelas.value,
+          comment: comentario.value,
+          data: new Date().toISOString()
+        };
+        emit('salvar-avaliacao', avaliacao);
+        fecharModal();
+      } else {
+        alert('Nota inválida');
+      }
+    };
 
-const fecharModal = () => {
-  emit('fechar')
-}
-
-const salvarAvaliacao = () => {
-  if (rating.value === 0 && comentario.value.trim() === "") {
-    alertaVisivel.value = true
-    setTimeout(() => { alertaVisivel.value = false }, 3000)
-    return
+    return {
+      comentario,
+      estrelas,
+      fecharModal,
+      submitAvaliar
+    };
   }
-
-  const avaliacao = {
-    id: props.avaliacaoExistente?.id || `id-${new Date().getTime()}`, 
-    data: new Date().toISOString(),
-    estrelas: rating.value,
-    comentario: comentario.value,
-    doramaId: props.dorama.id, 
-    nome: props.usuarioAtual || 'Anônimo', 
-  }
-
-  avaliacaoSalva.value = true
-
-  setTimeout(() => {
-    fecharModal()
-  }, 1000)
-
-}
-
-const setRating = (n) => {
-  rating.value = n
-}
+});
 </script>
 
-
 <style scoped>
-.modal {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
 
 .modal-content {
   background: white;
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 10px;
   max-width: 500px;
   width: 100%;
-  text-align: center;
-  position: relative;
 }
 
-.nota-container {
-  margin: 1rem 0;
+.input-group {
+  margin-bottom: 1rem;
 }
 
-.stars {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  font-size: 2rem;
-  color: #f1c40f;
-  cursor: pointer;
-}
-
-.star {
-  transition: color 0.2s ease;
-}
-
-.star.filled {
-  color: #f39c12;
-}
-
-textarea {
-  width: 95%;
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-
-.botoes-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
+.input-group label {
+  display: block;
 }
 
 button {
   background-color: #3498db;
   color: white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  border: none;
   cursor: pointer;
-}
-
-button.cancelar {
-  background-color: #e74c3c;
+  border-radius: 5px;
 }
 
 button:hover {
-  opacity: 0.9;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 2rem;
-  cursor: pointer;
-  color: #333;
-  z-index: 1001;
-}
-
-.close:hover {
-  color: #e74c3c;
-}
-
-
-.success-message {
-  background-color: #28a745;
-  color: white;
-  padding: 1rem;
-  border-radius: 5px;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-
-.alert-message {
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #e74c3c;
-  background-color: rgba(231, 76, 60, 0.1);
-  border: 1px solid #e74c3c;
-  padding: 0.25rem;
-  border-radius: 8px;
-  font-weight: bold;
-  text-align: center;
-  z-index: 1001;
-  width: 80%;
-  max-width: 300px;
+  background-color: #2980b9;
 }
 </style>

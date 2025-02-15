@@ -145,3 +145,4 @@ export default defineComponent({
   background-color: #ff4757; /* Cor rosa mais forte ao passar o mouse */
 }
 </style>
+
