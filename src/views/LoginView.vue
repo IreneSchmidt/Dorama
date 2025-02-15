@@ -1,10 +1,13 @@
+import Footer from '../components/Footer.vue'; 
+
+
 <template>
   <div class="home-container">
     <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-brand">DoramaHub</div>
       <div class="navbar-links">
-        <router-link to="/login" class="nav-link">Entrar</router-link>
+        <router-link to="/login" class="nav-button">Entrar</router-link>
         <router-link to="/register" class="nav-button">Criar Conta</router-link>
       </div>
     </nav>
@@ -49,14 +52,11 @@
         </form>
       </div>
     </div>
-    <!-- Footer -->
-    <footer class="site-footer">
-      <p>© 2024 DoramaHub. Todos os direitos reservados.</p>
-    </footer>
   </div>
 </template>
 
 <script setup>
+
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -89,9 +89,12 @@ const handleLogin = async () => {
 }
 
 .navbar-brand {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: 'Lobster', cursive;
+  font-size: 2.5rem;
+  color: #ff6f91; /* Cor rosa para o texto */
+  text-decoration: none;
+  transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .navbar-links {

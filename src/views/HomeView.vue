@@ -29,9 +29,6 @@
         </div>
       </div>
     </main>
-
-    <!-- Importando o Footer -->
-    <Footer />
   </div>
 </template>
 
@@ -44,7 +41,7 @@ export default defineComponent({
   name: 'HomePage',
   components: {
     Navbar,
-    Footer // Registre o Footer
+    Footer 
   },
   data() {
     return {

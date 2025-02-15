@@ -33,7 +33,7 @@
       </div>
     </main>
 
-    <Footer />
+
 
     <!-- Modal de Avaliação -->
     <ModalAvaliacao

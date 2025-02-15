@@ -8,6 +8,10 @@ export const router = createRouter({
             component: () => import('../views/HomeView.vue')
         },
         {
+            path: '/HomePage',
+            component: () => import('../views/HomePage.vue')
+        },
+        {
             path: '/login',
             component: () => import('../views/LoginView.vue')
         },
@@ -20,7 +24,7 @@ export const router = createRouter({
             component: () => import('../views/generic/AvaliarDorama.vue')
         },
         {
-            path: '/dorama/:id',
+            path: '/dorama/:title',
             component: () => import('../views/generic/DoramaDetail.vue')
         },
         {
