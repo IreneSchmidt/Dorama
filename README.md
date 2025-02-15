@@ -8,7 +8,7 @@ Siga os passos abaixo para rodar o projeto localmente:
 git clone https://github.com/IreneSchmidt/Dorama.git
 
 # 2. Entre na pasta do projeto
-cd SEU-REPOSITORIO
+cd Dorama
 
 # 3. Instale as dependências
 npm install
