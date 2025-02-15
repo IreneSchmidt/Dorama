@@ -60,7 +60,7 @@ export default class DoramaService {
 
   async editarDorama(id: string, doramaData: IDorama) {
     if (!id.trim() || !doramaData.Titulo.trim()) {
-      throw new Error('O ID ou o título do dorama são inválidos.');
+      throw new Error('Título do dorama é inválido.');
     }
 
     const doramaExistente = await this.doramaRepository.buscarIdPorNome(id);
@@ -79,7 +79,7 @@ export default class DoramaService {
 
   async deletarDorama(id: string) {
     if (!id.trim()) {
-      throw new Error('O ID do dorama é inválido.');
+      throw new Error('Dorama inválido.');
     }
     return await this.doramaRepository.deleteDorama(id);
   }

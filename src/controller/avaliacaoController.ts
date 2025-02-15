@@ -1,5 +1,5 @@
 import type { IAvaliacao } from '../model/Avaliacao';
-import AvaliacaoRepository from '../model/repositories/AvaliacaoRepository';
+import AvaliacaoRepository from '../model/repositories/avaliacaoRepository';
 
 export default class AvaliacaoController {
   avaliacaoRepository;

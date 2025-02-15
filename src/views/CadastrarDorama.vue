@@ -6,13 +6,12 @@
       <CadastrarDorama />
     </div>
 
-    <Footer />
   </div>
 </template>
 
 <script>
 import CadastrarDorama from "../components/CadastrarDorama.vue";
-import Navbar from '../components/Navbar.vue'; // Certifique-se de importar o Navbar
+import Navbar from '../components/NavbarCadastrarDorama.vue'; // Certifique-se de importar o Navbar
 
 export default {
   components: {
@@ -43,13 +42,5 @@ export default {
   border-radius: 8px;
 }
 
-footer {
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 1rem;
-}
 
-footer p {
-  color: white;
-}
 </style>

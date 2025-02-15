@@ -1,6 +1,6 @@
 import type { IAvaliacao } from '../../model/Avaliacao';
 import { Avaliacao } from '../../model/Avaliacao';
-import AvaliacaoController from '../AvaliacaoController';
+import AvaliacaoController from '../avaliacaoController';
 import { GenericStore } from './generic/GenericStore';
 
 const avaliacaoController = new AvaliacaoController();
