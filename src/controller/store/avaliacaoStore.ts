@@ -1,30 +1,23 @@
-import { defineStore } from 'pinia';
+import type { IAvaliacao } from '../../model/Avaliacao';
+import { Avaliacao } from '../../model/Avaliacao';
+import AvaliacaoController from '../AvaliacaoController';
+import { GenericStore } from './generic/GenericStore';
 
-const generateFakeAvaliacoes = (doramas: any[]) => {
-  return doramas.map(dorama => {
-    return {
-      doramaId: dorama.Id,
-      avaliacao: Math.floor(Math.random() * 10) + 1, // Gera uma nota de 1 a 5
-      usuario: `Usuário${Math.floor(Math.random() * 100) + 1}`, // Nome de usuário aleatório
-      comentario: `Comentário aleatório sobre o dorama ${dorama.Titulo}.`, // Comentário aleatório
-    };
-  });
-};
+const avaliacaoController = new AvaliacaoController();
+const genericStore = new GenericStore<IAvaliacao>('avaliacao');
 
-export const useAvaliacaoStore = defineStore('avaliacao', {
-  state: () => ({
-    avaliacoes: []  // Lista de avaliações
-  }),
-  actions: {
-    adicionarAvaliacao(avaliacao: any) {
-      this.avaliacoes.push(avaliacao);  // Adiciona a avaliação à lista
-    },
-    // Método para adicionar avaliações falsas aos doramas
-    gerarAvaliacoesFalsas(doramas: any[]) {
-      const fakeAvaliacoes = generateFakeAvaliacoes(doramas);
-      fakeAvaliacoes.forEach(avaliacao => {
-        this.adicionarAvaliacao(avaliacao);
-      });
-    }
-  }
-});
+const avaliacoes: Avaliacao[] = [
+    new Avaliacao('1', 'Avaliação 1', 5, 'Ótimo dorama!'),
+    new Avaliacao('2', 'Avaliação 2', 4, 'Muito bom!'),
+    new Avaliacao('3', 'Avaliação 3', 3, 'Foi ok.'),
+    new Avaliacao('4', 'Avaliação 4', 2, 'Não gostei muito.'),
+    new Avaliacao('5', 'Avaliação 5', 1, 'Péssimo dorama.'),
+    new Avaliacao('6', 'Avaliação 6', 5, 'Maravilhoso!'),
+    new Avaliacao('7', 'Avaliação 7', 4, 'Gostei bastante.'),
+    new Avaliacao('8', 'Avaliação 8', 3, 'Foi razoável.'),
+    new Avaliacao('9', 'Avaliação 9', 2, 'Não foi bom.'),
+    new Avaliacao('10', 'Avaliação 10', 1, 'Horrível.')
+];
+
+genericStore.enableMock(async () => avaliacoes);
+export const useAvaliacaoStore = genericStore.createStore(avaliacaoController);

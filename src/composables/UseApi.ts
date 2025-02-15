@@ -22,7 +22,6 @@ export default function useApi(url: string) {
 
   const update = async <T = Record<string, any>>(form: { id: T }) => {
     const { data } = await api.put(`${url}/${form?.id ? form.id : ''}`, form);
-    console.log(data);
     return data;
   };
 
