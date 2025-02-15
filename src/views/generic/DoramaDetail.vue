@@ -48,9 +48,9 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import Navbar from '@/components/Navbar.vue';
-import Footer from '@/components/Footer.vue';
-import ModalAvaliacao from '@/components/ModalAvaliacao.vue'; // Importando o ModalAvaliacao
+import Navbar from '../../components/Navbar.vue';
+import Footer from '../../components/Footer.vue';
+import ModalAvaliacao from '../../components/ModalAvaliacao.vue'; // Importando o ModalAvaliacao
 
 // Definindo a interface Avaliacao
 interface Avaliacao {
