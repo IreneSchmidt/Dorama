@@ -70,7 +70,7 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute();
-    const doramaId = route.params.id;
+    const doramaId = route.params.title;
 
     // Dados dos doramas simulados
     const doramas = ref([
