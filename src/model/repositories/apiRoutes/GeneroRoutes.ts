@@ -1,4 +1,3 @@
-// DoramaRoutes.ts
 export default class GeneroRoutes {
     private baseUrl: string;
   

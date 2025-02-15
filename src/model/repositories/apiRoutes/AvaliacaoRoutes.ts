@@ -1,6 +1,6 @@
 import type { BaseConfig } from "./BaseConfig";
 
-class AvaliacaoRoutes {
+export class AvaliacaoRoutes {
     protected config: BaseConfig;
     protected name: string;
     constructor(config: BaseConfig) {
@@ -16,3 +16,4 @@ class AvaliacaoRoutes {
         return `${this.name}/${this.config.id}`;
     };
 };
+export default AvaliacaoRoutes;

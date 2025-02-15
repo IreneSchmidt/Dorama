@@ -23,7 +23,7 @@ export class GenericStore<T extends IEntity> {
   }
 
   createStore(controller: any) {
-    const initialMockFunction = this.initialMockFunction; // preserva o valor inicial de mockFunction
+    const initialMockFunction = this.initialMockFunction; 
     return defineStore(this.name, {
       state: () => ({
         items: this.items,

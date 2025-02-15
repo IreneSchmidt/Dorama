@@ -13,8 +13,8 @@ export default class AvaliacaoRepository {
     return new AvaliacaoRoutes({}).entity;
   }
 
-  createDeleteRoute(id: string) {
-    return new AvaliacaoRoutes({id: id}).delete;
+  createDeleteRoute(Id: string) {
+    return new AvaliacaoRoutes({id: Id}).delete;
   }
 
   async fetchAllAvaliacao() {
@@ -23,7 +23,7 @@ export default class AvaliacaoRepository {
 
       const response = await this.apiClient.get(baseRoute);
 
-      return response.data.value.map((avaliacao: IAvaliacao) => new Avaliacao(avaliacao.id, avaliacao.data, avaliacao.nota, avaliacao.comentario));
+      return response.data.value.map((avaliacao: IAvaliacao) => new Avaliacao(avaliacao.Id, avaliacao.data, avaliacao.nota, avaliacao.comentario));
     } catch (error) {
       console.error("Erro ao buscar avaliações", error);
       throw error;
@@ -43,11 +43,11 @@ export default class AvaliacaoRepository {
     }
   }
 
-  async updateAvaliacao(id: string, form: IAvaliacao) {
+  async updateAvaliacao(Id: string, form: IAvaliacao) {
     try {
       const baseRoute = this.createBaseRoute();
 
-      form.id = id;
+      form.Id = Id;
 
       const response = await this.apiClient.put(baseRoute, form);
 
@@ -58,9 +58,9 @@ export default class AvaliacaoRepository {
     }
   }
 
-  async deleteAvaliacao(id: string) {
+  async deleteAvaliacao(Id: string) {
     try {
-      const deleteRoute = this.createDeleteRoute(id);
+      const deleteRoute = this.createDeleteRoute(Id);
 
       const response = await this.apiClient.delete(deleteRoute);
 
