@@ -5,7 +5,7 @@
 Siga os passos abaixo para rodar o projeto localmente:
 
 # 1. Clone o repositório
-git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+git clone https://github.com/IreneSchmidt/Dorama.git
 
 # 2. Entre na pasta do projeto
 cd SEU-REPOSITORIO
