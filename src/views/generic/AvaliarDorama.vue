@@ -9,15 +9,10 @@
       </div>
 
       <div class="input-group">
-        <label for="estrelas">Nota (1 a 10)</label>
-        <input
-          v-model="estrelas"
-          type="number"
-          id="estrelas"
-          min="1"
-          max="10"
-          required
-        />
+        <label for="estrelas">Nota</label>
+        <div class="stars">
+          <span v-for="n in 10" :key="n" @click="estrelas = n" :class="{ active: estrelas >= n }">★</span>
+        </div>
       </div>
 
       <button type="submit">Enviar Avaliação</button>
@@ -28,11 +23,11 @@
     </div>
 
     <!-- Modal para exibir após o envio -->
-    <ModalAvaliacao 
-      v-if="mostrarModal" 
-      :dorama="dorama" 
-      @fechar="fecharModal" 
-      @salvar-avaliacao="handleSalvarAvaliacao"
+    <ModalAvaliacao
+        v-if="mostrarModal"
+        :dorama="dorama"
+        @fechar="fecharModal"
+        @salvar-avaliacao="handleSalvarAvaliacao"
     />
   </div>
 </template>
@@ -40,54 +35,46 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
-import ModalAvaliacao from '../../components/ModalAvaliacao.vue';  
+import ModalAvaliacao from '../../components/ModalAvaliacao.vue';
 
-const doramaId = useRoute().params.id; // Obtendo o ID do dorama da URL
+const doramaId = useRoute().params.id;
 const estrelas = ref(0);
 const comentario = ref('');
 const erro = ref(null);
-const mostrarModal = ref(false); // Controle de exibição do modal
+const mostrarModal = ref(false);
 
-// Função para salvar avaliação
 const salvarAvaliacao = async () => {
   if (estrelas.value < 1 || estrelas.value > 10) {
     erro.value = 'A nota deve ser entre 1 e 10.';
     return;
   }
 
-  // Criar o objeto de avaliação
   const avaliacao = {
-    id: `id-${new Date().getTime()}`,  // Gerar um ID único para a avaliação
+    id: `id-${new Date().getTime()}`,
     data: new Date().toISOString(),
     estrelas: estrelas.value,
     comentario: comentario.value,
-    doramaId: doramaId  // Associar a avaliação com o dorama
+    doramaId: doramaId
   };
 
   try {
-    // Enviar a avaliação para a API
-    const resposta = await useAvaliacaoStore.adicionarAvaliacao(avaliacao);
-    if (resposta) {
-      // Após sucesso, limpar campos
-      estrelas.value = 0;
-      comentario.value = '';
-      erro.value = null; // Limpar erros
-      mostrarModal.value = true; // Exibir o modal
-    }
+    // Simulação de salvamento
+    console.log('Salvando avaliação:', avaliacao);
+    estrelas.value = 0;
+    comentario.value = '';
+    erro.value = null;
+    mostrarModal.value = true;
   } catch (error) {
     erro.value = 'Erro ao enviar avaliação, tente novamente.';
     console.error('Erro ao salvar avaliação:', error);
   }
 };
 
-// Função para fechar o modal
 const fecharModal = () => {
   mostrarModal.value = false;
 };
 
-// Função para lidar com a avaliação salva
 const handleSalvarAvaliacao = (avaliacao) => {
-  // Aqui você pode adicionar a avaliação à lista de avaliações do dorama
   console.log('Avaliação salva:', avaliacao);
 };
 </script>
@@ -132,5 +119,22 @@ button:hover {
   color: red;
   font-size: 1rem;
   margin-top: 1rem;
+}
+
+/* Estilização das estrelas */
+.stars {
+  display: flex;
+  gap: 5px;
+}
+
+.stars span {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.stars span.active {
+  color: #f1c40f;
 }
 </style>

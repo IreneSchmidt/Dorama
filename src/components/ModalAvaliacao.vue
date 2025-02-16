@@ -1,4 +1,3 @@
-
 <template>
   <div class="modal-overlay">
     <div class="modal-content">
@@ -10,20 +9,15 @@
         </div>
 
         <div class="input-group">
-          <label for="estrelas">Nota (1 a 10)</label>
-          <input
-              v-model="estrelas"
-              type="number"
-              id="estrelas"
-              min="1"
-              max="10"
-              required
-          />
+          <label for="estrelas">Nota</label>
+          <div class="stars">
+            <span v-for="n in 10" :key="n" @click="estrelas = n" :class="{ active: estrelas >= n }">★</span>
+          </div>
         </div>
 
         <button type="submit">Salvar Avaliação</button>
       </form>
-      <button @click="fecharModal">Fechar</button>
+      <button class="close-btn" @click="fecharModal">Fechar</button>
     </div>
   </div>
 </template>
@@ -47,7 +41,7 @@ export default defineComponent({
     const submitAvaliar = () => {
       if (estrelas.value >= 1 && estrelas.value <= 10) {
         const avaliacao = {
-          user: 'Usuário', // Aqui você pode personalizar com o nome do usuário
+          user: 'Usuário',
           score: estrelas.value,
           comment: comentario.value,
           data: new Date().toISOString()
@@ -55,7 +49,7 @@ export default defineComponent({
         emit('salvar-avaliacao', avaliacao);
         fecharModal();
       } else {
-        alert('Nota inválida');
+        alert('Escolha uma nota válida.');
       }
     };
 
@@ -70,44 +64,100 @@ export default defineComponent({
 </script>
 
 <style scoped>
+/* Fonte global */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* Fundo escurecido */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Caixa do modal */
 .modal-content {
   background: white;
   padding: 2rem;
-  border-radius: 10px;
+  border-radius: 12px;
   max-width: 500px;
   width: 100%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Campos do formulário */
 .input-group {
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .input-group label {
   display: block;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
 }
 
+/* Input e Textarea */
+.input-group textarea {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: left;
+}
+
+/* Botões */
 button {
   background-color: #3498db;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1.5rem;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s;
+  margin-top: 10px;
 }
 
 button:hover {
   background-color: #2980b9;
+}
+
+/* Botão de fechar */
+.close-btn {
+  background-color: #e74c3c;
+}
+
+.close-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Estilização das estrelas */
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.stars span {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.stars span.active {
+  color: #f1c40f;
 }
 </style>

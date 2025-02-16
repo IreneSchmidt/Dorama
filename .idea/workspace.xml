@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3706699-35b8-4953-975c-763d30445db5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ModalAvaliacao.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ModalAvaliacao.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/generic/AvaliarDorama.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generic/AvaliarDorama.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +55,7 @@
       <workItem from="1739453320072" duration="96000" />
       <workItem from="1739545787830" duration="1387000" />
       <workItem from="1739548491486" duration="59000" />
+      <workItem from="1739649657313" duration="8413000" />
     </task>
     <servers />
   </component>
