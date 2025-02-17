@@ -13,16 +13,23 @@ export default class DoramaService {
   }
 
   async listarDoramas() {
-    return await this.doramaRepository.fetchAllDorama();
+    try {
+      return await this.doramaRepository.fetchAllDorama();
+    } catch (error) {
+      throw new Error(`Erro ao listar doramas: ${error.message}`);
+    }
   }
-
-
 
   async buscarDoramaPorNome(nomeDorama: string) {
     if (!nomeDorama.trim()) {
       throw new Error('O nome do dorama não pode ser vazio.');
     }
-    return await this.doramaRepository.buscarIdPorNome(nomeDorama);
+
+    try {
+      return await this.doramaRepository.buscarIdPorNome(nomeDorama);
+    } catch (error) {
+      throw new Error(`Erro ao buscar dorama: ${error.message}`);
+    }
   }
 
   async cadastrarDorama(doramaData: IDorama) {
@@ -30,57 +37,74 @@ export default class DoramaService {
       throw new Error('O título do dorama não pode ser vazio.');
     }
 
-    const generosCadastrados = await this.generoRepository.fetchAllGenero();
-    const generosIds: string[] = [];
+    try {
+      const generosCadastrados = await this.generoRepository.fetchAllGenero();
+      const generosIds: string[] = [];
 
-    for (const nomeGenero of doramaData.Generos) {
-      const generoExistente = generosCadastrados.find(
-        (g: IGenero) => g.Nome.toLowerCase() === nomeGenero.toLowerCase()
+      for (const nomeGenero of doramaData.Generos) {
+        let generoExistente = generosCadastrados.find(
+            (g: IGenero) => g.Nome.toLowerCase() === nomeGenero.toLowerCase()
+        );
+
+        if (!generoExistente) {
+          generoExistente = await this.generoRepository.createGenero({ Id: '', Nome: nomeGenero });
+        }
+
+        generosIds.push(generoExistente.Id);
+      }
+
+      const novoDorama = new Dorama(
+          '',
+          doramaData.Titulo,
+          doramaData.Descricao,
+          doramaData.DataLancamento,
+          doramaData.QtdEpisodios,
+          generosIds
       );
 
-      if (generoExistente) {
-        generosIds.push(generoExistente.Id);
-      } else {
-        const novoGenero = await this.generoRepository.createGenero({ Id: '', Nome: nomeGenero });
-        generosIds.push(novoGenero.Id);
-      }
+      return await this.doramaRepository.createDorama(novoDorama);
+    } catch (error) {
+      throw new Error(`Erro ao cadastrar dorama: ${error.message}`);
     }
-
-    const novoDorama = new Dorama(
-      '',
-      doramaData.Titulo,
-      doramaData.Descricao,
-      doramaData.DataLancamento,
-      doramaData.QtdEpisodios,
-      generosIds
-    );
-
-    return await this.doramaRepository.createDorama(novoDorama);
   }
 
   async editarDorama(id: string, doramaData: IDorama) {
     if (!id.trim() || !doramaData.Titulo.trim()) {
-      throw new Error('Título do dorama é inválido.');
+      throw new Error('ID ou título do dorama são inválidos.');
     }
 
-    const doramaExistente = await this.doramaRepository.buscarIdPorNome(id);
-    if (!doramaExistente) {
-      throw new Error('Dorama não encontrado.');
+    try {
+      const doramaExistente = await this.doramaRepository.fetchDoramaById(id);
+      if (!doramaExistente) {
+        throw new Error('Dorama não encontrado.');
+      }
+
+      doramaExistente.Titulo = doramaData.Titulo;
+      doramaExistente.Descricao = doramaData.Descricao;
+      doramaExistente.DataLancamento = doramaData.DataLancamento;
+      doramaExistente.QtdEpisodios = doramaData.QtdEpisodios;
+      doramaExistente.Generos = doramaData.Generos;
+
+      return await this.doramaRepository.updateDorama(id, doramaExistente);
+    } catch (error) {
+      throw new Error(`Erro ao editar dorama: ${error.message}`);
     }
-
-    doramaExistente.Titulo = doramaData.Titulo;
-    doramaExistente.Descricao = doramaData.Descricao;
-    doramaExistente.DataLancamento = doramaData.DataLancamento;
-    doramaExistente.QtdEpisodios = doramaData.QtdEpisodios;
-    doramaExistente.Generos = doramaData.Generos;
-
-    return await this.doramaRepository.updateDorama(id, doramaExistente);
   }
 
   async deletarDorama(id: string) {
     if (!id.trim()) {
-      throw new Error('Dorama inválido.');
+      throw new Error('ID do dorama é inválido.');
     }
-    return await this.doramaRepository.deleteDorama(id);
+
+    try {
+      const doramaExistente = await this.doramaRepository.fetchDoramaById(id);
+      if (!doramaExistente) {
+        throw new Error('Dorama não encontrado.');
+      }
+
+      return await this.doramaRepository.deleteDorama(id);
+    } catch (error) {
+      throw new Error(`Erro ao deletar dorama: ${error.message}`);
+    }
   }
 }

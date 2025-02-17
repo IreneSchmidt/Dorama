@@ -22,7 +22,6 @@
       <p>{{ erro }}</p>
     </div>
 
-    <!-- Modal para exibir após o envio -->
     <ModalAvaliacao
         v-if="mostrarModal"
         :dorama="dorama"
@@ -58,7 +57,6 @@ const salvarAvaliacao = async () => {
   };
 
   try {
-    // Simulação de salvamento
     console.log('Salvando avaliação:', avaliacao);
     estrelas.value = 0;
     comentario.value = '';
@@ -89,49 +87,10 @@ const handleSalvarAvaliacao = (avaliacao) => {
   margin-bottom: 1rem;
 }
 
-.input-group label {
-  display: block;
-  font-weight: bold;
-}
-
-.input-group input,
-.input-group textarea {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-}
-
-button {
-  background-color: #3498db;
-  color: white;
-  padding: 0.8rem 2rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #2980b9;
-}
-
-.error-message {
-  color: red;
-  font-size: 1rem;
-  margin-top: 1rem;
-}
-
-/* Estilização das estrelas */
-.stars {
-  display: flex;
-  gap: 5px;
-}
-
 .stars span {
   font-size: 1.5rem;
   cursor: pointer;
   color: #ccc;
-  transition: color 0.3s;
 }
 
 .stars span.active {

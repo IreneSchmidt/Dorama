@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3706699-35b8-4953-975c-763d30445db5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/services/http.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ModalAvaliacao.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ModalAvaliacao.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/DoramaService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DoramaService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HomePage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/generic/AvaliarDorama.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generic/AvaliarDorama.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -15,6 +19,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/package-lock.json" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -55,7 +62,9 @@
       <workItem from="1739453320072" duration="96000" />
       <workItem from="1739545787830" duration="1387000" />
       <workItem from="1739548491486" duration="59000" />
-      <workItem from="1739649657313" duration="8413000" />
+      <workItem from="1739649657313" duration="10387000" />
+      <workItem from="1739764789184" duration="43000" />
+      <workItem from="1739794421073" duration="3202000" />
     </task>
     <servers />
   </component>

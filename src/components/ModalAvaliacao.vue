@@ -17,7 +17,7 @@
 
         <button type="submit">Salvar Avaliação</button>
       </form>
-      <button class="close-btn" @click="fecharModal">Fechar</button>
+      <button class="close-btn" @click="fecharModal">Cancelar</button>
     </div>
   </div>
 </template>
