@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3706699-35b8-4953-975c-763d30445db5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/services/http.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ModalAvaliacao.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ModalAvaliacao.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/DoramaService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DoramaService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HomePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/generic/AvaliarDorama.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generic/AvaliarDorama.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +62,7 @@
       <workItem from="1739649657313" duration="10387000" />
       <workItem from="1739764789184" duration="43000" />
       <workItem from="1739794421073" duration="3202000" />
+      <workItem from="1739837183744" duration="4230000" />
     </task>
     <servers />
   </component>

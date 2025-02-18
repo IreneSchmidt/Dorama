@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  frontend:
+    container_name: trab1-ps-frontend
+    build:
+      context: .  # O contexto de build é o próprio diretório do frontend
+      dockerfile: Dockerfile  # Dockerfile dentro do diretório Dorama
+    ports:
+      - "8080:80"  # Porta para o frontend
+    networks:
+      - minha-rede
+
+networks:
+  minha-rede:
+    driver: bridge
